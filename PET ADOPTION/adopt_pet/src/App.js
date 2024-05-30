@@ -1,8 +1,8 @@
-import MyNavbar from './components/navbar';
+import Landing from './components/landing';
 
 function App() {
   return (
-    <MyNavbar />
+    <Landing />
   );
 }
 
