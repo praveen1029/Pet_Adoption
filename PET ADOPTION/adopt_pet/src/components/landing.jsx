@@ -9,8 +9,35 @@ import fish from '../animations/fish.json';
 
 import React, { useEffect, useState } from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
-function Landing(){
+export const MyNavbar = () =>{
+  return(
+    <>
+      <Navbar className='nav' expand="sm">
+        <Container fluid>
+          <div className='d-flex justify-content-between align-items-end'>
+            <div>
+              <Navbar.Brand href="#home">
+                  <img className='logo' src={logo} alt='logo' />
+                  <span className='name'>AdoptAPet</span>
+              </Navbar.Brand>
+            </div>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" className="custom-navbar-toggle" />
+          </div>
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="ms-auto">
+              <Nav.Link as={Link} to="/home">Home</Nav.Link>
+              <Nav.Link as={Link} to="/jj">Login</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </>
+  )
+}
+
+export const Landing = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const handleScroll = () => {
@@ -30,27 +57,7 @@ function Landing(){
 
   return (
     <>
-      <Navbar className='nav' expand="sm">
-        <Container fluid>
-          <div className='d-flex justify-content-between align-items-end'>
-            <div>
-              <Navbar.Brand href="#home">
-                  <img className='logo' src={logo} alt='logo' />
-                  <span className='name'>AdoptAPet</span>
-              </Navbar.Brand>
-            </div>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" className="custom-navbar-toggle" />
-          </div>
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ms-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#about">About</Nav.Link>
-              <Nav.Link href="#services">Services</Nav.Link>
-              <Nav.Link href="#contact">Contact</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+      <MyNavbar />
       <div className={`banner-div ${isScrolled ? 'scrolled' : ''}`}>
         <img className='banner' src={banner} alt='banner' />
       </div>
@@ -80,5 +87,3 @@ function Landing(){
     </>
   );
 };
-
-export default Landing;
