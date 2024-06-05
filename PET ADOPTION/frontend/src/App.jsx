@@ -1,7 +1,11 @@
 import { Landing } from './components/landing';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Register from './components/register';
 import Login from './components/login';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import PetForm from './components/pet_form';
+import PetList from './components/pet_list';
+import EditForm from './components/edit_form';
+import UserDetails from './components/user_details';
 
 function App() {
   return (
@@ -12,6 +16,10 @@ function App() {
         <Route path='/home' element={<Landing />}></Route>
         <Route path='/register' element={<Register />}></Route>
         <Route path='/login' element={<Login />}></Route>
+        <Route path='/pet_form' element={<PetForm />}></Route>
+        <Route path='/pet_list' element={<PetList />}></Route>
+        <Route path='/edit' element={<EditForm />}></Route>
+        <Route path='/user_details' element={<UserDetails />}></Route>
       </Routes>
     </BrowserRouter>
     </>

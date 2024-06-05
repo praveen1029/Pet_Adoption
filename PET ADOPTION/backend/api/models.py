@@ -33,3 +33,10 @@ class CustomUser(AbstractBaseUser):
 
     def __str__(self):
         return self.email
+
+class PetDetails(models.Model):
+    category = models.CharField(max_length=50)
+    description = models.CharField(max_length=1000)
+    remark = models.CharField(max_length=500)
+    image = models.ImageField()
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)

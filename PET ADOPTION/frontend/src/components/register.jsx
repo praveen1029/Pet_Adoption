@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { MyNavbar } from './landing';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -67,6 +68,7 @@ const Register = () => {
                 <input type="checkbox" name="is_donor" checked={formData.is_donor} onChange={handleChange} />
             </div>
             <button type="submit">Register</button>
+            <Link to="/login" >Login</Link>
         </form>
         </>
     );

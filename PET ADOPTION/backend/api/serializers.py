@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
+from .models import *
 
 User = get_user_model()
 
@@ -31,3 +32,13 @@ class RegisterSerializer(serializers.ModelSerializer):
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField()
+
+class PetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PetDetails
+        fields = '__all__'
+
+class PetRegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PetDetails
+        exclude = ['remark']
