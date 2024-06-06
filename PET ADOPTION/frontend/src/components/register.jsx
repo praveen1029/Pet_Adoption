@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { MyNavbar } from './landing';
 import { Link } from 'react-router-dom';
+import BaseURL from './base_url';
+
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -22,9 +24,11 @@ const Register = () => {
         });
     };
 
+    const baseurl = BaseURL()
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8000/api/register/', formData)
+        axios.post( baseurl + 'register/', formData)
             .then(response => {
                 console.log(response.data);
                 // Handle successful registration

@@ -41,4 +41,9 @@ class PetSerializer(serializers.ModelSerializer):
 class PetRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = PetDetails
-        exclude = ['remark']
+        exclude = ['remark', 'user']
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = '__all__'

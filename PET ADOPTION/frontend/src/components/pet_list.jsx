@@ -1,15 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useLocation } from 'react-router-dom';
+import BaseURL from "./base_url";
 
 const PetList = () =>{
-    const location = useLocation()
-    const userId = location.state.userId;
     const [pets, setPets] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/list_pet/')
+        const baseurl = BaseURL()
+        axios.get(baseurl + 'list_pet/')
             .then(response => {
                 setPets(response.data);
             })
@@ -20,7 +19,7 @@ const PetList = () =>{
 
     return (
         <div>
-            <Link to="/user_details" state={{ id: userId }}>User Details</Link>
+            <Link to="/user_details">User Details</Link>
             <h1>Pet List</h1>
             <ul>
                 {pets.map(pet => (

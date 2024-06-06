@@ -1,10 +1,11 @@
-from rest_framework import generics, status
+from rest_framework import generics, status, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate, login
 from .serializers import *
 from django.contrib.auth import get_user_model
 from rest_framework import generics
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
 User = get_user_model()
@@ -19,16 +20,23 @@ class LoginView(APIView):
         serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = authenticate(email=serializer.data['email'], password=serializer.data['password'])
+        is_donor = UserSerializer(user).data['is_donor']
         if user is not None:
-            login(request, user)
-            user = User.objects.get(email=serializer.data['email'])
-            return Response({"is_donor": user.is_donor, "id":user.id}, status=status.HTTP_200_OK)
+            refresh = RefreshToken.for_user(user)
+            return Response({'access_token': str(refresh.access_token),'refresh_token': str(refresh),"is_donor": is_donor}, status=status.HTTP_200_OK)
         return Response({"error": "Invalid credentials"}, status=status.HTTP_400_BAD_REQUEST)
     
 class RegisterPet(generics.CreateAPIView):
-    queryset = PetDetails.objects.all()
     serializer_class = PetRegisterSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    def perform_create(self, serializer):
+        print(self.request.user)
+        serializer.save(user=self.request.user)
 
 class ListPets(generics.ListAPIView):
     queryset = PetDetails.objects.all()
     serializer_class = PetSerializer
+
+class ListUsers(generics.ListAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer

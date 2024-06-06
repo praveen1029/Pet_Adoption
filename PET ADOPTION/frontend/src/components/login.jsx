@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import BaseURL from './base_url';
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -18,15 +19,18 @@ const Login = () => {
 
     const navigate = useNavigate();
 
+    const baseurl = BaseURL()
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8000/api/login/', formData)
+        axios.post(baseurl + 'login/', formData)
             .then(response => {
-                const userId = response.data.id;
+                localStorage.setItem('access_token', response.data.access_token);
+                localStorage.setItem('refresh_token', response.data.refresh_token);
                 if (response.data.is_donor){
-                    navigate('/pet_form', { state: { userId } });
+                    navigate('/pet_form');
                 } else{
-                    navigate('/pet_list', { state: { userId } });
+                    navigate('/pet_list');
                 }
             })
             .catch(error => {
