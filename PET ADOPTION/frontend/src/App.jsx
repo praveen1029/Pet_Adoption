@@ -4,8 +4,7 @@ import Register from './components/register';
 import Login from './components/login';
 import PetForm from './components/pet_form';
 import PetList from './components/pet_list';
-import EditForm from './components/edit_form';
-import UserDetails from './components/user_details';
+import UserPage from './components/user_page';
 
 function App() {
   return (
@@ -18,8 +17,7 @@ function App() {
         <Route path='/login' element={<Login />}></Route>
         <Route path='/pet_form' element={<PetForm />}></Route>
         <Route path='/pet_list' element={<PetList />}></Route>
-        <Route path='/edit' element={<EditForm />}></Route>
-        <Route path='/user_details' element={<UserDetails />}></Route>
+        <Route path='/user_page' element={<UserPage />}></Route>
       </Routes>
     </BrowserRouter>
     </>

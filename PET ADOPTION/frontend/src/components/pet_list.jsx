@@ -19,7 +19,7 @@ const PetList = () =>{
 
     return (
         <div>
-            <Link to="/user_details">User Details</Link>
+            <Link to="/user_page">User Details</Link>
             <h1>Pet List</h1>
             <ul>
                 {pets.map(pet => (

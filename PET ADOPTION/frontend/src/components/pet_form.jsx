@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import BaseURL from './base_url';
+import { Link } from 'react-router-dom';
 
 const PetForm = () => {
     const [formData, setFormData] = useState({
@@ -74,6 +75,7 @@ const PetForm = () => {
                     <input type="file" name="img" onChange={handleChange} />
                 </div>
                 <button type="submit">Register</button>
+                <Link to="/user_page">User Details</Link>
             </form>
         </>
     );

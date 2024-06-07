@@ -30,13 +30,22 @@ class RegisterPet(generics.CreateAPIView):
     serializer_class = PetRegisterSerializer
     permission_classes = [permissions.IsAuthenticated]
     def perform_create(self, serializer):
-        print(self.request.user)
         serializer.save(user=self.request.user)
 
 class ListPets(generics.ListAPIView):
     queryset = PetDetails.objects.all()
     serializer_class = PetSerializer
 
-class ListUsers(generics.ListAPIView):
-    queryset = CustomUser.objects.all()
+class GetUser(generics.RetrieveAPIView):
     serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user
+    
+class UpdateUser(generics.UpdateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = UserUpdateSerializer
+
+    def get_object(self):
+        return self.request.user
