@@ -11,7 +11,7 @@ import React, { useEffect, useState } from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-export const MyNavbar = () =>{
+export const MyNavbar = ({ hideLink }) =>{
   return(
     <>
       <Navbar className='nav' expand="sm">
@@ -27,8 +27,8 @@ export const MyNavbar = () =>{
           </div>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
-              <Nav.Link as={Link} to="/home">Home</Nav.Link>
-              <Nav.Link as={Link} to="/login">Login</Nav.Link>
+              <Nav.Link as={Link} className='to-home' to="/home">Home</Nav.Link>
+              {!hideLink && (<Nav.Link as={Link} className='to-login' to="/login">Login</Nav.Link>)}
             </Nav>
           </Navbar.Collapse>
         </Container>
