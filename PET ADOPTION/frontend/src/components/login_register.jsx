@@ -1,24 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import '../components/login.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import BaseURL from './base_url';
+import axios from 'axios';
 import { MyNavbar } from './landing';
+import BaseURL from './base_url';
+import '../components/login_register.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-notifications/lib/notifications.css';
 import logo from "../images/pet_logo.png";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import ClipLoader from "react-spinners/ClipLoader";
 
-const Login = () => {
-    const [formData, setFormData] = useState({
+const LoginRegister = () => {
+
+    // UseNavigate Hook For Navigation To Another Page
+    const navigate = useNavigate();
+    // Calling Baseurl
+    const baseurl = BaseURL();
+
+    // Initial Values For Form Fields
+    const initialform = {
         email: '',
-        password: '',
         first_name: '',
         last_name: '',
         contact: '',
+        address: '',
         is_donor: false
-    });
+    }
 
+    // UseState Hook For Login And Register Form
+    const [formData, setFormData] = useState(initialform);
+
+    // UseState Hook To Change Value Of Visible Variable To Hide Or Show Register Or Login Form
     const [visible, setVisible] = useState(true);
 
+    // UseState Hook To Show Loading GIF
+    const [loading, setLoading] = useState(false);
+
+    // Function For Change In Form Fields
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
         setFormData({
@@ -27,29 +45,11 @@ const Login = () => {
         });
     };
 
-    const navigate = useNavigate();
-    const baseurl = BaseURL();
+    // UseRef Hook To Slide Between Login And Register Page
+    const slideRegister = React.useRef(null);
+    const slideLogin = React.useRef(null);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        axios.post(baseurl + 'login/', formData)
-            .then(response => {
-                localStorage.setItem('access_token', response.data.access_token);
-                localStorage.setItem('refresh_token', response.data.refresh_token);
-                if (response.data.is_donor) {
-                    navigate('/pet_form');
-                } else {
-                    navigate('/pet_list');
-                }
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });
-    };
-
-    const slideDivRef1 = React.useRef(null);
-    const slideDivRef2 = React.useRef(null);
-
+    // UseEffect To Trigger On Initial Page Load
     useEffect(() => {
         if (visible) {
             slideIn();
@@ -58,13 +58,15 @@ const Login = () => {
         }
     }, [visible]);
 
+    // Function To Change Visible Variable Value
     const handleClick = () => {
         setVisible(!visible);
     };
 
+    // Function To Change To Login
     const slideIn = () => {
-        const element1 = slideDivRef1.current;
-        const element2 = slideDivRef2.current;
+        const element1 = slideRegister.current;
+        const element2 = slideLogin.current;
         if (element1) {
             element1.style.transition = 'transform 1s ease-in-out, opacity 1s ease-in-out';
             element1.style.transform = 'translateX(0)';
@@ -77,9 +79,10 @@ const Login = () => {
         }
     };
 
+    // Function To Change To Register
     const slideOut = () => {
-        const element1 = slideDivRef1.current;
-        const element2 = slideDivRef2.current;
+        const element1 = slideRegister.current;
+        const element2 = slideLogin.current;
         if (element1) {
             element1.style.transition = 'transform 1s ease, opacity 1s ease';
             element1.style.transform = 'translateX(-100%)';
@@ -92,15 +95,75 @@ const Login = () => {
         }
     };
 
+    // Function To Handle Login
+    const handleLogin = (e) => {
+        e.preventDefault();
+        axios.post(baseurl + 'login/', formData)
+        .then(response => {
+            localStorage.setItem('access_token', response.data.access_token);
+            localStorage.setItem('refresh_token', response.data.refresh_token);
+            if (response.data.is_donor) {
+                navigate('/pet_form');
+            } else {
+                navigate('/pet_list');
+            }
+            alert(response)
+        })
+        .catch(error => {
+            NotificationManager.error('Login failed. Please check your credentials and try again.', 'Error');
+        });
+    };
+
+    // Function To Handle Register
+    const handleRegister = (e) => {
+        e.preventDefault();
+        setLoading(true);
+        var msgs = []
+        axios.post( baseurl + 'register/', formData)
+        .then(response => {
+            setFormData(initialform)
+            setLoading(false);
+            NotificationManager.success(`Registration Successfull, A password has been sent to your mail.` , 'Success')
+            handleClick()
+            
+        })
+        .catch(error => {
+            if (error.response.data.email){
+                msgs.push(error.response.data.email[0].slice(7))
+            }
+            if(error.response.data.first_name){
+                msgs.push(error.response.data.first_name)
+            }
+            if(error.response.data.last_name){
+                msgs.push(error.response.data.last_name)
+            }
+            if(error.response.data.address){
+                msgs.push(error.response.data.address)
+            }
+            if(error.response.data.contact){
+                msgs.push(error.response.data.contact)
+            }
+            setLoading(false);
+            msgs.map(msg=> (
+                NotificationManager.error(`Registration Failed. ${msg}` , 'Error')
+            ))
+        });
+    };
+
     return (
         <>
             <MyNavbar hideLink={true} />
-            <div className='container-fluid d-flex justify-content-center align-items-center login-div'>
+            <div className='container-fluid d-flex justify-content-center align-items-center login-register-div'>
+                {loading && (
+                    <div className='spinner-overlay'>
+                        <ClipLoader size={50} />
+                    </div>
+                )}
                 <div className="slide-in-div">
                     <div className='row'>
-                        <div className='form-div d-flex flex-column justify-content-center align-items-center' ref={slideDivRef2}>
+                        <div className='form-div d-flex flex-column justify-content-center align-items-center' ref={slideLogin}>
                             <div style={{ display: visible ? 'block' : 'none' }}>
-                                <form onSubmit={handleSubmit} className='d-flex flex-column align-items-center'>
+                                <form onSubmit={handleLogin} className='d-flex flex-column align-items-center'>
                                     <div className='logo-div mb-4 d-flex flex-column align-items-center'>
                                         <img className='logo' src={logo} alt='logo' />
                                         <span className='name'>AdoptAPet</span>
@@ -134,8 +197,8 @@ const Login = () => {
                                 </form>
                             </div>
                             <div style={{ display: visible ? 'none' : 'block' }}>
-                                <form onSubmit={handleSubmit} className='d-flex flex-column align-items-center'>
-                                <div className='logo-div mb-3 d-flex flex-column align-items-center'>
+                                <form onSubmit={handleRegister} className='d-flex flex-column align-items-center'>
+                                <div className='logo-div mt-2 mb-3 d-flex flex-column align-items-center'>
                                         <img className='logo' src={logo} alt='logo' />
                                         <span className='name'>AdoptAPet</span>
                                     </div>
@@ -149,24 +212,22 @@ const Login = () => {
                                             style={{ width: '300px' }}
                                         />
                                     </div>
-                                    <div className='mb-3'>
+                                    <div className='d-flex mb-3 justify-content-between' style={{ width: '300px' }}>
                                         <input
                                             type="text"
                                             name="first_name"
                                             value={formData.first_name}
                                             onChange={handleChange}
                                             placeholder='First Name'
-                                            style={{ width: '300px' }}
-                                        />
-                                    </div>
-                                    <div className='mb-3'>
+                                            style={{ width: '50%'}}
+                                        />&nbsp;
                                         <input
                                             type="text"
                                             name="last_name"
                                             value={formData.last_name}
                                             onChange={handleChange}
                                             placeholder='Last Name'
-                                            style={{ width: '300px' }}
+                                            style={{ width: '50%' }}
                                         />
                                     </div>
                                     <div className='mb-3'>
@@ -176,8 +237,19 @@ const Login = () => {
                                             value={formData.contact}
                                             onChange={handleChange}
                                             placeholder='Contact'
+                                            pattern='[1-9]{1}[0-9]{9}'
+                                            title='Phone number must have 10 digits !!'
                                             style={{ width: '300px' }}
                                         />
+                                    </div>
+                                    <div className='mb-3'>
+                                        <textarea 
+                                            name="address" 
+                                            placeholder='Address' 
+                                            value={formData.address}
+                                            onChange={handleChange}
+                                            style={{ width: '300px' }}>
+                                        </textarea>
                                     </div>
                                     <div className='mb-3'>
                                         <label>Are you a donor?</label>&nbsp;&nbsp;&nbsp;
@@ -189,7 +261,7 @@ const Login = () => {
                                         />
                                     </div>
                                     <div className='mt-3'>
-                                    <button type="submit">Register</button>
+                                        <button type="submit">Register</button>
                                     </div>                                    
                                     <div className='mt-3'>
                                         <div className='move-link' onClick={handleClick}>Already have an account?</div>
@@ -197,12 +269,13 @@ const Login = () => {
                                 </form>
                             </div>
                         </div>
-                        <div className={`form-div-img ${visible ? '' : 'cat-img'}`} ref={slideDivRef1}></div>
+                        <div className={`form-div-img ${visible ? '' : 'cat-img'}`} ref={slideRegister}></div>
                     </div>
                 </div>
             </div>
+            <NotificationContainer />
         </>
     );
 };
 
-export default Login;
+export default LoginRegister;

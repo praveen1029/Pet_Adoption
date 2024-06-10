@@ -28,7 +28,7 @@ export const MyNavbar = ({ hideLink }) =>{
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
               <Nav.Link as={Link} className='to-home' to="/home">Home</Nav.Link>
-              {!hideLink && (<Nav.Link as={Link} className='to-login' to="/login">Login</Nav.Link>)}
+              {!hideLink && (<Nav.Link as={Link} className='to-login' to="/login-register">Login</Nav.Link>)}
             </Nav>
           </Navbar.Collapse>
         </Container>

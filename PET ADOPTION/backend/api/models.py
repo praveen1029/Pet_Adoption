@@ -22,6 +22,7 @@ class CustomUser(AbstractBaseUser):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     contact = models.CharField(max_length=30)
+    address = models.TextField()
     is_donor = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
