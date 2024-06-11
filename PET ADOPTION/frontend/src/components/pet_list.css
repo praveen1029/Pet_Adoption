@@ -1,0 +1,24 @@
+.pet-list-div {
+    height: 90vh !important;
+    width: 100%;
+    background-color: white;
+    position: absolute;
+    background-image: url('../images/pets-bg.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.pet-list-div::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.pet-div {
+    z-index: 1;
+}

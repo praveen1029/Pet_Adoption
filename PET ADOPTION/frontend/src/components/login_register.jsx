@@ -7,7 +7,7 @@ import '../components/login_register.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-notifications/lib/notifications.css';
 import logo from "../images/pet_logo.png";
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 import ClipLoader from "react-spinners/ClipLoader";
 
 const LoginRegister = () => {
@@ -24,6 +24,7 @@ const LoginRegister = () => {
         last_name: '',
         contact: '',
         address: '',
+        password: '',
         is_donor: false
     }
 
@@ -46,70 +47,71 @@ const LoginRegister = () => {
     };
 
     // UseRef Hook To Slide Between Login And Register Page
-    const slideRegister = React.useRef(null);
-    const slideLogin = React.useRef(null);
+    const slideImg = React.useRef(null);
+    const slideForm = React.useRef(null);
 
     // UseEffect To Trigger On Initial Page Load
     useEffect(() => {
         if (visible) {
+            // Function To Change To Login To Register And Image Div
+            const slideIn = () => {
+                const img = slideImg.current;
+                const form = slideForm.current;
+                if (img) {
+                    img.style.transition = 'transform 1s ease-in-out, opacity 1s ease-in-out';
+                    img.style.transform = 'translateX(0)';
+                    img.style.opacity = '1';
+                }
+                if (form) {
+                    form.style.transition = 'transform 1s ease-in-out, opacity 1s ease-in-out';
+                    form.style.transform = 'translateX(0)';
+                    form.style.opacity = '1';
+                }
+            };
             slideIn();
         } else {
+            // Function To Change To Register To Login and Image Div
+            const slideOut = () => {
+                const img = slideImg.current;
+                const form = slideForm.current;
+                if (img) {
+                    img.style.transition = 'transform 1s ease, opacity 1s ease';
+                    img.style.transform = 'translateX(-100%)';
+                    img.style.opacity = '1';
+                }
+                if (form) {
+                    form.style.transition = 'transform 1s ease, opacity 1s ease';
+                    form.style.transform = 'translateX(100%)';
+                    form.style.opacity = '1';
+                }
+            };
             slideOut();
         }
     }, [visible]);
 
     // Function To Change Visible Variable Value
     const handleClick = () => {
+        setFormData(initialform)
         setVisible(!visible);
-    };
-
-    // Function To Change To Login
-    const slideIn = () => {
-        const element1 = slideRegister.current;
-        const element2 = slideLogin.current;
-        if (element1) {
-            element1.style.transition = 'transform 1s ease-in-out, opacity 1s ease-in-out';
-            element1.style.transform = 'translateX(0)';
-            element1.style.opacity = '1';
-        }
-        if (element2) {
-            element2.style.transition = 'transform 1s ease-in-out, opacity 1s ease-in-out';
-            element2.style.transform = 'translateX(0)';
-            element2.style.opacity = '1';
-        }
-    };
-
-    // Function To Change To Register
-    const slideOut = () => {
-        const element1 = slideRegister.current;
-        const element2 = slideLogin.current;
-        if (element1) {
-            element1.style.transition = 'transform 1s ease, opacity 1s ease';
-            element1.style.transform = 'translateX(-100%)';
-            element1.style.opacity = '1';
-        }
-        if (element2) {
-            element2.style.transition = 'transform 1s ease, opacity 1s ease';
-            element2.style.transform = 'translateX(100%)';
-            element2.style.opacity = '1';
-        }
     };
 
     // Function To Handle Login
     const handleLogin = (e) => {
         e.preventDefault();
+        setLoading(true);
         axios.post(baseurl + 'login/', formData)
         .then(response => {
             localStorage.setItem('access_token', response.data.access_token);
             localStorage.setItem('refresh_token', response.data.refresh_token);
+            setLoading(false);
             if (response.data.is_donor) {
                 navigate('/pet_form');
             } else {
                 navigate('/pet_list');
             }
-            alert(response)
         })
         .catch(error => {
+            setLoading(false);
             NotificationManager.error('Login failed. Please check your credentials and try again.', 'Error');
         });
     };
@@ -125,7 +127,6 @@ const LoginRegister = () => {
             setLoading(false);
             NotificationManager.success(`Registration Successfull, A password has been sent to your mail.` , 'Success')
             handleClick()
-            
         })
         .catch(error => {
             if (error.response.data.email){
@@ -152,125 +153,123 @@ const LoginRegister = () => {
 
     return (
         <>
-            <MyNavbar hideLink={true} />
+            <MyNavbar hideHome={false} hideLogin={true} hideAdoptions={false} hideProfile={false} />
             <div className='container-fluid d-flex justify-content-center align-items-center login-register-div'>
                 {loading && (
                     <div className='spinner-overlay'>
                         <ClipLoader size={50} />
                     </div>
                 )}
-                <div className="slide-in-div">
-                    <div className='row'>
-                        <div className='form-div d-flex flex-column justify-content-center align-items-center' ref={slideLogin}>
-                            <div style={{ display: visible ? 'block' : 'none' }}>
-                                <form onSubmit={handleLogin} className='d-flex flex-column align-items-center'>
-                                    <div className='logo-div mb-4 d-flex flex-column align-items-center'>
-                                        <img className='logo' src={logo} alt='logo' />
-                                        <span className='name'>AdoptAPet</span>
-                                    </div>
-                                    <div className='mb-3'>
-                                        <input
-                                            type="email"
-                                            name="email"
-                                            value={formData.email}
-                                            onChange={handleChange}
-                                            placeholder='Enter Your Email'
-                                            style={{ width: '300px' }}
-                                        />
-                                    </div>
-                                    <div className='mb-3'>
-                                        <input
-                                            type="password"
-                                            name="password"
-                                            value={formData.password}
-                                            onChange={handleChange}
-                                            placeholder='Enter Your Password'
-                                            style={{ width: '300px' }}
-                                        />
-                                    </div>
-                                    <div className='mt-3'>
-                                        <button type="submit">Login</button>
-                                    </div>
-                                    <div className='mt-3'>
-                                        <div className='move-link' onClick={handleClick}>Don't have an account?</div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div style={{ display: visible ? 'none' : 'block' }}>
-                                <form onSubmit={handleRegister} className='d-flex flex-column align-items-center'>
-                                <div className='logo-div mt-2 mb-3 d-flex flex-column align-items-center'>
-                                        <img className='logo' src={logo} alt='logo' />
-                                        <span className='name'>AdoptAPet</span>
-                                    </div>
-                                    <div className='mb-3'>
-                                        <input
-                                            type="email"
-                                            name="email"
-                                            value={formData.email}
-                                            onChange={handleChange}
-                                            placeholder='Email'
-                                            style={{ width: '300px' }}
-                                        />
-                                    </div>
-                                    <div className='d-flex mb-3 justify-content-between' style={{ width: '300px' }}>
-                                        <input
-                                            type="text"
-                                            name="first_name"
-                                            value={formData.first_name}
-                                            onChange={handleChange}
-                                            placeholder='First Name'
-                                            style={{ width: '50%'}}
-                                        />&nbsp;
-                                        <input
-                                            type="text"
-                                            name="last_name"
-                                            value={formData.last_name}
-                                            onChange={handleChange}
-                                            placeholder='Last Name'
-                                            style={{ width: '50%' }}
-                                        />
-                                    </div>
-                                    <div className='mb-3'>
-                                        <input
-                                            type="text"
-                                            name="contact"
-                                            value={formData.contact}
-                                            onChange={handleChange}
-                                            placeholder='Contact'
-                                            pattern='[1-9]{1}[0-9]{9}'
-                                            title='Phone number must have 10 digits !!'
-                                            style={{ width: '300px' }}
-                                        />
-                                    </div>
-                                    <div className='mb-3'>
-                                        <textarea 
-                                            name="address" 
-                                            placeholder='Address' 
-                                            value={formData.address}
-                                            onChange={handleChange}
-                                            style={{ width: '300px' }}>
-                                        </textarea>
-                                    </div>
-                                    <div className='mb-3'>
-                                        <label>Are you a donor?</label>&nbsp;&nbsp;&nbsp;
-                                        <input
-                                            type="checkbox"
-                                            name="is_donor"
-                                            checked={formData.is_donor}
-                                            onChange={handleChange}
-                                        />
-                                    </div>
-                                    <div className='mt-3'>
-                                        <button type="submit">Register</button>
-                                    </div>                                    
-                                    <div className='mt-3'>
-                                        <div className='move-link' onClick={handleClick}>Already have an account?</div>
-                                    </div>
-                                </form>
-                            </div>
+                <div className='row'>
+                    <div className='form-div d-flex flex-column justify-content-center align-items-center' ref={slideForm}>
+                        <div style={{ display: visible ? 'block' : 'none' }}>
+                            <form onSubmit={handleLogin} className='d-flex flex-column align-items-center'>
+                                <div className='logo-div mb-4 d-flex flex-column align-items-center'>
+                                    <img className='logo' src={logo} alt='logo' />
+                                    <span className='name'>AdoptAPet</span>
+                                </div>
+                                <div className='mb-3'>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        placeholder='Enter Your Email'
+                                        style={{ width: '300px' }}
+                                    />
+                                </div>
+                                <div className='mb-3'>
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        value={formData.password}
+                                        onChange={handleChange}
+                                        placeholder='Enter Your Password'
+                                        style={{ width: '300px' }}
+                                    />
+                                </div>
+                                <div className='mt-3'>
+                                    <button type="submit">Login</button>
+                                </div>
+                                <div className='mt-3'>
+                                    <div className='move-link' onClick={handleClick}>Don't have an account?</div>
+                                </div>
+                            </form>
                         </div>
-                        <div className={`form-div-img ${visible ? '' : 'cat-img'}`} ref={slideRegister}></div>
+                        <div style={{ display: visible ? 'none' : 'block' }}>
+                            <form onSubmit={handleRegister} className='d-flex flex-column align-items-center'>
+                            <div className='logo-div mt-2 mb-3 d-flex flex-column align-items-center'>
+                                    <img className='logo' src={logo} alt='logo' />
+                                    <span className='name'>AdoptAPet</span>
+                                </div>
+                                <div className='mb-3'>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        placeholder='Email'
+                                        style={{ width: '300px' }}
+                                    />
+                                </div>
+                                <div className='d-flex mb-3 justify-content-between' style={{ width: '300px' }}>
+                                    <input
+                                        type="text"
+                                        name="first_name"
+                                        value={formData.first_name}
+                                        onChange={handleChange}
+                                        placeholder='First Name'
+                                        style={{ width: '50%'}}
+                                    />&nbsp;
+                                    <input
+                                        type="text"
+                                        name="last_name"
+                                        value={formData.last_name}
+                                        onChange={handleChange}
+                                        placeholder='Last Name'
+                                        style={{ width: '50%' }}
+                                    />
+                                </div>
+                                <div className='mb-3'>
+                                    <input
+                                        type="text"
+                                        name="contact"
+                                        value={formData.contact}
+                                        onChange={handleChange}
+                                        placeholder='Contact'
+                                        pattern='[1-9]{1}[0-9]{9}'
+                                        title='Phone number must have 10 digits !!'
+                                        style={{ width: '300px' }}
+                                    />
+                                </div>
+                                <div className='mb-3'>
+                                    <textarea 
+                                        name="address" 
+                                        placeholder='Address' 
+                                        value={formData.address}
+                                        onChange={handleChange}
+                                        style={{ width: '300px' }}>
+                                    </textarea>
+                                </div>
+                                <div className='mb-3'>
+                                    <label>Are you a donor?</label>&nbsp;&nbsp;&nbsp;
+                                    <input
+                                        type="checkbox"
+                                        name="is_donor"
+                                        checked={formData.is_donor}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                <div className='mt-3'>
+                                    <button type="submit">Register</button>
+                                </div>                                    
+                                <div className='mt-3'>
+                                    <div className='move-link' onClick={handleClick}>Already have an account?</div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
+                    <div className={`form-div-img ${visible ? '' : 'cat-img'}`} ref={slideImg}></div>
                 </div>
             </div>
             <NotificationContainer />

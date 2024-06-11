@@ -1,3 +1,6 @@
+import React, { useEffect, useState } from 'react';
+import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import '../components/landing.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from "../images/pet_logo.png";
@@ -7,11 +10,7 @@ import dog from '../animations/dog.json';
 import cat from '../animations/cat.json';
 import fish from '../animations/fish.json';
 
-import React, { useEffect, useState } from 'react';
-import { Navbar, Nav, Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-
-export const MyNavbar = ({ hideLink }) =>{
+export const MyNavbar = ({ hideHome, hideLogin, hideAdoptions, hideProfile }) =>{
   return(
     <>
       <Navbar className='nav' expand="sm">
@@ -27,8 +26,10 @@ export const MyNavbar = ({ hideLink }) =>{
           </div>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
-              <Nav.Link as={Link} className='to-home' to="/home">Home</Nav.Link>
-              {!hideLink && (<Nav.Link as={Link} className='to-login' to="/login-register">Login</Nav.Link>)}
+              { !hideHome && (<Nav.Link as={Link} className='to-home' to="/home">HOME</Nav.Link>)}
+              { !hideLogin && (<Nav.Link as={Link} className='to-login' to="/login-register">LOGIN</Nav.Link>)}
+              { hideAdoptions && (<Nav.Link as={Link} className='to-login' to="/login-register">MY&nbsp;ADOPTIONS</Nav.Link>)}
+              { hideProfile && (<Nav.Link as={Link} className='to-login' to="/login-register">PROFILE</Nav.Link>)}
             </Nav>
           </Navbar.Collapse>
         </Container>

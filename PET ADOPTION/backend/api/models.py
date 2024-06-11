@@ -41,3 +41,10 @@ class PetDetails(models.Model):
     remark = models.CharField(max_length=500)
     image = models.ImageField()
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    is_adopted = models.BooleanField(default=False)
+    date = models.DateTimeField(auto_created=True, null=True)
+
+class AdoptionDetails(models.Model):
+    pet = models.ForeignKey(PetDetails, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_created=True, null=True)

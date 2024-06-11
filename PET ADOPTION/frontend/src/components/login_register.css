@@ -15,14 +15,14 @@ html {
     background-position: center;
 }
 
-.container::before {
+.login-register-div::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.4);
     z-index: 1;
 }
 
@@ -31,7 +31,7 @@ html {
     border-bottom-left-radius: 5px;
     background-color: #52AEA1;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    height: 70vh;
+    height: 75vh;
     width: 60vh;
     z-index: 1;
 }
@@ -44,7 +44,7 @@ html {
     background-repeat: no-repeat;
     background-size: cover;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    height: 70vh;
+    height: 75vh;
     width: 60vh;
     z-index: 1;
     transition: background-image 1s ease-in-out;
@@ -106,7 +106,7 @@ button:hover{
 }
 
 .move-link{
-    font-size:larger;
+    font-size: 15px;
 }
 
 .move-link:hover{

@@ -33,7 +33,7 @@ class RegisterPet(generics.CreateAPIView):
         serializer.save(user=self.request.user)
 
 class ListPets(generics.ListAPIView):
-    queryset = PetDetails.objects.all()
+    queryset = PetDetails.objects.filter(is_adopted = False)
     serializer_class = PetSerializer
 
 class GetUser(generics.RetrieveAPIView):
