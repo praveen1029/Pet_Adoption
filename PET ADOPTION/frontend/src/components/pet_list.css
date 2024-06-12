@@ -3,7 +3,7 @@
     width: 100%;
     background-color: white;
     position: absolute;
-    background-image: url('../images/pets-bg.png');
+    background-image: url('../images/pets-bg.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -21,4 +21,29 @@
 
 .pet-div {
     z-index: 1;
+}
+
+.pet-card-div{
+    display: flex;
+    gap: 20px; /* Adjust the gap between items as needed */
+}
+
+.pet-card{
+    background-color: #52AEA1;
+    width: 20%;
+    border-radius: 10px;
+}
+.pet-img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pet-content-div{
+    display: flex;
+    justify-content: space-between;
+}
+.view-btn{
+    border-radius: 16px;
+    width: 100%;
 }
