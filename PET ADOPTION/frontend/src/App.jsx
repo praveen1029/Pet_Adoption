@@ -4,6 +4,7 @@ import LoginRegister from './components/login_register';
 import PetForm from './components/pet_form';
 import PetList from './components/pet_list';
 import UserPage from './components/user_page';
+import PetDetails from './components/pet_details';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/pet_form' element={<PetForm />}></Route>
         <Route path='/pet_list' element={<PetList />}></Route>
         <Route path='/user_page' element={<UserPage />}></Route>
+        <Route path='/pet_details' element={<PetDetails />}></Route>
       </Routes>
     </BrowserRouter>
     </>

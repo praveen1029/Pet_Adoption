@@ -153,7 +153,7 @@ const LoginRegister = () => {
 
     return (
         <>
-            <MyNavbar hideHome={false} hideLogin={true} hideAdoptions={false} hideProfile={false} />
+            <MyNavbar hideHome={false} hideLogin={true} hidepets={false} hideAdoptions={false} hideProfile={false} />
             <div className='container-fluid d-flex justify-content-center align-items-center login-register-div'>
                 {loading && (
                     <div className='spinner-overlay'>
