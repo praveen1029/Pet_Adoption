@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import BaseURL from "./base_url";
-import { Link } from "react-router-dom";
+import { MyNavbar } from "./landing";
+import '../components/user_page.css'
 
 const UserPage = () =>{
 
@@ -14,6 +15,7 @@ const UserPage = () =>{
         first_name: '',
         last_name: '',
         contact: '',
+        address:'',
         is_donor: false,
     });
 
@@ -67,6 +69,32 @@ const UserPage = () =>{
 
     return(
         <>
+         <MyNavbar hideHome={true} hideLogin={true} hidepets={true} hideAdoptions={true} hideProfile={false} />
+
+         <div className='container-fluid d-flex justify-content-center align-items-center user-details-div'>
+            <div className='user-details'>
+                <h2>My Details</h2>
+                <div className="user-data">
+                    <div className="data-fields">
+                        Full Name <br />
+                        {formData.first_name}{formData.last_name}
+                    </div>
+                    <div className="data-fields">
+                        Email
+                        {formData.email}
+                    </div>
+                    <div className="data-fields">
+                        contact
+                        {formData.contact}
+                    </div>
+                    <div className="data-fields">
+                        address
+                        {formData.address}
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div style={{ display: isVisible ? 'block' : 'none' }}>
         {formData.id}
         {formData.first_name}{formData.last_name}
@@ -90,6 +118,7 @@ const UserPage = () =>{
                 <label>Contact:</label>
                 <input type="text" name="contact" value={formData.contact} onChange={handleChange} />
             </div>
+            <div></div>
             <button type="submit">Register</button>
         </form>
         </div>

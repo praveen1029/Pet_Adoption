@@ -10,18 +10,21 @@ const PetDetails = () => {
     return (
         <>
             <MyNavbar hideHome={true} hideLogin={true} hidepets={true} hideAdoptions={true} hideProfile={true} />
-            <div className='container-fluid flex-column d-flex justify-content-center align-items-center details-div'>
-
+            <div className='container-fluid d-flex justify-content-center align-items-center details-div'>
                 <div className='pet-details-div'>
-                    
-                    <h1>PetDetails</h1>
-
-                    {pet.category}
-                    {pet ? (
-                        <h2>Category:<img src={pet.image} alt={pet.image} width="285" /></h2>
-                    ) : (
-                        <p>No category information available.</p>
-                    )}
+                    <div className='pets-img'>
+                        <img src={pet.image} alt={pet.category} />
+                    </div>
+                    <div className='pet-details'>
+                        <div style={{ height:'100%' }}>
+                            <h2>{ pet.category }</h2>
+                            <p>{ pet.description }</p>
+                            <p>{ pet.remark }</p>
+                        </div>
+                        <div className="adopt-btn">
+                            <button>Adopt</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>
