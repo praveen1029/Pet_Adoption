@@ -22,6 +22,92 @@
 }
 
 .data-fields {
-    padding: 16px;
+    padding: 10px;
     height: fit-content;
+}
+
+.data-fields label{
+    font-style: oblique;
+}
+
+.round-div {
+    height: 140px;
+    width: 140px;
+    border-radius: 50%;
+    background-color: #f0f0f0; /* Example background color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.round-div img {
+    width: 100%; /* Makes the image fit the div */
+    height: 100%; /* Ensures the image covers the div */
+    object-fit: cover; /* Ensures the image covers the div without distortion */
+}
+
+
+.card {
+    width: 350px;
+    background-color: #52AEA1;
+    border: none;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.image img {
+    transition: all 0.5s
+}
+
+.card:hover .image img {
+    transform: scale(1.5)
+}
+
+
+.name {
+    font-size: 22px;
+    font-weight: bold
+}
+
+.idd {
+    font-size: 14px;
+    font-weight: 600
+}
+
+.idd1 {
+    font-size: 12px
+}
+
+.number {
+    font-size: 22px;
+    font-weight: bold
+}
+
+
+.btn1 {
+    height: 40px;
+    width: 150px;
+    border: none;
+    background-color: #000;
+    color: #aeaeae;
+    font-size: 15px
+}
+
+.text span {
+    font-size: 13px;
+    color: #545454;
+    font-weight: 500
+}
+
+
+
+.join {
+    font-size: 14px;
+    color: #000;
+    font-weight: bold
+}
+
+.date {
+    background-color: #ccc
 }

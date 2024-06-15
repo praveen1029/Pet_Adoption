@@ -25,6 +25,7 @@ const LoginRegister = () => {
         contact: '',
         address: '',
         password: '',
+        image: null,
         is_donor: false
     }
 
@@ -39,11 +40,23 @@ const LoginRegister = () => {
 
     // Function For Change In Form Fields
     const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
-        setFormData({
-            ...formData,
-            [name]: type === 'checkbox' ? checked : value,
-        });
+        const { name, value, type, checked, files } = e.target;
+        if (type === 'checkbox') {
+            setFormData({
+                ...formData,
+                [name]: checked
+            });
+        } else if (type === 'file') {
+            setFormData({
+                ...formData,
+                [name]: files[0] 
+            });
+        } else {
+            setFormData({
+                ...formData,
+                [name]: value
+            });
+        }
     };
 
     // UseRef Hook To Slide Between Login And Register Page
@@ -121,7 +134,11 @@ const LoginRegister = () => {
         e.preventDefault();
         setLoading(true);
         var msgs = []
-        axios.post( baseurl + 'register/', formData)
+        axios.post( baseurl + 'register/', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
         .then(response => {
             setFormData(initialform)
             setLoading(false);
@@ -250,6 +267,13 @@ const LoginRegister = () => {
                                         onChange={handleChange}
                                         style={{ width: '300px' }}>
                                     </textarea>
+                                </div>
+                                <div className='mb-3'>
+                                    <input 
+                                        type='file' 
+                                        name='image' 
+                                        onChange={handleChange}
+                                        style={{ width: '300px' }}/>
                                 </div>
                                 <div className='mb-3'>
                                     <label>Are you a donor?</label>&nbsp;&nbsp;&nbsp;

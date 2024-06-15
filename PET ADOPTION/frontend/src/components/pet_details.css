@@ -32,3 +32,10 @@
     padding: 6%;
     height: 95%;
 }
+
+.description-div {
+    padding: 2%;
+    width: 160%;
+    background-color: #0b6b5f;
+    border-radius: 10px;
+}

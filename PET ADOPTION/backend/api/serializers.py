@@ -10,7 +10,7 @@ User = get_user_model()
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('email', 'first_name', 'last_name', 'contact', 'address', 'is_donor')
+        fields = ('email', 'first_name', 'last_name', 'contact', 'address', 'is_donor', 'image')
         extra_kwargs = {
             'email': {
                 'error_messages': {
@@ -36,11 +36,14 @@ class RegisterSerializer(serializers.ModelSerializer):
                 'error_messages': {
                     'blank': 'Address cannot be blank'
                 }
+            },
+            'image': {
+                'required': False, 
+                'allow_null': True
             }
         }
 
     def create(self, validated_data):
-        # Generate a random 6-digit password
         random_password = ''.join(random.choices(string.digits, k=6))
 
         send_mail(
@@ -57,12 +60,12 @@ class RegisterSerializer(serializers.ModelSerializer):
             first_name = validated_data['first_name'],
             last_name = validated_data['last_name'],
             contact = validated_data['contact'],
+            address = validated_data['address'],
+            image = validated_data.get('image', 'images/man.jpg'),
             is_donor = validated_data['is_donor']
         )
         user.set_password(random_password)
         user.save()
-
-        # Send the password via emai
 
         return user
 
@@ -88,4 +91,4 @@ class UserSerializer(serializers.ModelSerializer):
 class UserUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ('email', 'first_name', 'last_name', 'contact', 'address')
+        fields = ('email', 'first_name', 'last_name', 'contact', 'address', 'image')

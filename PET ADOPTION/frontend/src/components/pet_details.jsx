@@ -18,7 +18,9 @@ const PetDetails = () => {
                     <div className='pet-details'>
                         <div style={{ height:'100%' }}>
                             <h2>{ pet.category }</h2>
-                            <p>{ pet.description }</p>
+                            <div className='description-div'>
+                                <p>{ pet.description }</p>
+                            </div>
                             <p>{ pet.remark }</p>
                         </div>
                         <div className="adopt-btn">

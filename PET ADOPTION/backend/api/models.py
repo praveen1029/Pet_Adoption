@@ -26,6 +26,7 @@ class CustomUser(AbstractBaseUser):
     is_donor = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    image = models.ImageField()
 
     objects = CustomUserManager()
 
