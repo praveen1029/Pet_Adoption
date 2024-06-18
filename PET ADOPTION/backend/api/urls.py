@@ -8,4 +8,6 @@ urlpatterns = [
     re_path(r'list_pet/', ListPets.as_view(), name='list_pet'),
     re_path(r'get_user/', GetUser.as_view(), name='get_user'),
     re_path(r'update_user/', UpdateUser.as_view(), name='update_user'),
+    re_path(r'change_password/', ChangePasswordView.as_view(), name='change_password'),
+    re_path(r'validate_token/', ValidateTokenView.as_view(), name='validate_token'),
 ]

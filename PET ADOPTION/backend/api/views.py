@@ -1,11 +1,13 @@
 from rest_framework import generics, status, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate
 from .serializers import *
 from django.contrib.auth import get_user_model
 from rest_framework import generics
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
+from rest_framework_simplejwt.tokens import UntypedToken
 
 
 User = get_user_model()
@@ -46,6 +48,25 @@ class GetUser(generics.RetrieveAPIView):
 class UpdateUser(generics.UpdateAPIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = UserUpdateSerializer
-
     def get_object(self):
         return self.request.user
+
+class ChangePasswordView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    def post(self, request):
+        serializer = ChangePasswordSerializer(data=request.data)
+        if serializer.is_valid():
+            user = request.user
+            if not user.check_password(serializer.validated_data['current']):
+                return Response({"non_field_errors": ["Current password is Wrong."]}, status=status.HTTP_400_BAD_REQUEST)
+            user.set_password(serializer.validated_data['passw'])
+            user.save()
+            return Response({"detail": "Password changed successfully."}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+class ValidateTokenView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+            return Response({"detail": "Token is valid."}, status=status.HTTP_200_OK)

@@ -12,8 +12,12 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 const LoginRegister = () => {
 
+
+    const InvalidToken = localStorage.getItem('InvalidToken');
+
     // UseNavigate Hook For Navigation To Another Page
     const navigate = useNavigate();
+    
     // Calling Baseurl
     const baseurl = BaseURL();
 
@@ -28,6 +32,13 @@ const LoginRegister = () => {
         image: null,
         is_donor: false
     }
+
+    useEffect(() => {
+        if(InvalidToken != ''){
+            NotificationManager.error(InvalidToken, 'Error');
+            localStorage.setItem('InvalidToken', '');
+        }
+    }, []);
 
     // UseState Hook For Login And Register Form
     const [formData, setFormData] = useState(initialform);
@@ -125,6 +136,7 @@ const LoginRegister = () => {
         })
         .catch(error => {
             setLoading(false);
+            setFormData(initialform)
             NotificationManager.error('Login failed. Please check your credentials and try again.', 'Error');
         });
     };
@@ -133,6 +145,7 @@ const LoginRegister = () => {
     const handleRegister = (e) => {
         e.preventDefault();
         setLoading(true);
+        console.log(formData)
         var msgs = []
         axios.post( baseurl + 'register/', formData, {
             headers: {
@@ -215,7 +228,7 @@ const LoginRegister = () => {
                         </div>
                         <div style={{ display: visible ? 'none' : 'block' }}>
                             <form onSubmit={handleRegister} className='d-flex flex-column align-items-center'>
-                            <div className='logo-div mt-2 mb-3 d-flex flex-column align-items-center'>
+                                <div className='logo-div mt-2 mb-3 d-flex flex-column align-items-center'>
                                     <img className='logo' src={logo} alt='logo' />
                                     <span className='name'>AdoptAPet</span>
                                 </div>
