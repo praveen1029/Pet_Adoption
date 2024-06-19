@@ -82,7 +82,23 @@ class PetSerializer(serializers.ModelSerializer):
 class PetRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = PetDetails
-        exclude = ['remark', 'user']
+        exclude = ['user']
+        extra_kwargs = {
+            'description': {
+                'error_messages': {
+                    'blank': 'Please provide your pets description.'
+                }
+            },
+            'remark': {
+                'required': False, 
+                'allow_null': True
+            },
+            'image': {
+                'error_messages': {
+                    'blank': 'Please provide your pets image.'
+                }
+            }
+        }
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

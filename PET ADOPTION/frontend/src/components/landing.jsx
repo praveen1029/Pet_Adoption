@@ -10,7 +10,7 @@ import dog from '../animations/dog.json';
 import cat from '../animations/cat.json';
 import fish from '../animations/fish.json';
 
-export const MyNavbar = ({ hideHome, hideLogin, hidepets, hideAdoptions, hideProfile }) => {
+export const MyNavbar = ({ hideHome, hideLogin, hidepets, hideAdoptions, hideProfile, hidedonateform, hidedonations }) => {
   return(
     <>
       <Navbar className='nav' expand="sm">
@@ -29,6 +29,8 @@ export const MyNavbar = ({ hideHome, hideLogin, hidepets, hideAdoptions, hidePro
               { !hideHome && (<Nav.Link as={Link} className='to-home' to="/home">HOME</Nav.Link>)}
               { !hideLogin && (<Nav.Link as={Link} className='to-login' to="/login-register">LOGIN</Nav.Link>)}
               { hidepets && (<Nav.Link as={Link} className='to-pet-list' to="/pet_list">PETS</Nav.Link>)}
+              { hidedonateform && (<Nav.Link as={Link} className='to-pet-donate' to="/pet_form">DONATE</Nav.Link>)}
+              { hidedonations && (<Nav.Link as={Link} className='to-donations' to="/login-register">MY&nbsp;DONATIONS</Nav.Link>)}
               { hideAdoptions && (<Nav.Link as={Link} className='to-login' to="/login-register">MY&nbsp;ADOPTIONS</Nav.Link>)}
               { hideProfile && (<Nav.Link as={Link} className='to-profile' to="/user_page">PROFILE</Nav.Link>)}
             </Nav>

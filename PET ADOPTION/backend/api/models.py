@@ -39,13 +39,13 @@ class CustomUser(AbstractBaseUser):
 class PetDetails(models.Model):
     category = models.CharField(max_length=50)
     description = models.CharField(max_length=1000)
-    remark = models.CharField(max_length=500)
+    remark = models.CharField(max_length=500, blank=True)
     image = models.ImageField()
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     is_adopted = models.BooleanField(default=False)
-    date = models.DateTimeField(auto_created=True, null=True)
+    date = models.DateTimeField(auto_now_add=True, null=True)
 
 class AdoptionDetails(models.Model):
     pet = models.ForeignKey(PetDetails, on_delete=models.CASCADE)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    date = models.DateTimeField(auto_created=True, null=True)
+    date = models.DateTimeField(auto_now_add=True, null=True)

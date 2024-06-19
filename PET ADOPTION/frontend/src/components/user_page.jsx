@@ -17,6 +17,8 @@ const UserPage = () => {
 
     const [isprofile, setIsprofile] = useState(true);
 
+    const [isdonar, setIsDonor] = useState(false);
+
     const [formData, setFormData] = useState({
         email: '',
         first_name: '',
@@ -58,26 +60,32 @@ const UserPage = () => {
             },
         });
         setFormData(response.data);
+        if (response.data.is_donor === true){
+            setIsDonor(true)
+        }else{
+            setIsDonor(false)
+        }
     };
 
-    const validateToken = async () => {
-        try {
-            await axios.get(baseurl + `validate_token/`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-            fetchUserDetails();
-        } catch (error) {
-            localStorage.setItem('InvalidToken', 'Session Expired, Please login again.');
-            navigate('/login-register');
-        }
-    }
 
     useEffect(() => {
+        const validateToken = async () => {
+            try {
+                await axios.get(baseurl + `validate_token/`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+            } catch (error) {
+                localStorage.setItem('InvalidToken', 'Session Expired, Please login again.');
+                navigate('/login-register');
+            }
+        }
         validateToken();
-    }, []);
+        fetchUserDetails();
+    }, );
 
     const handleChange = (e) => {
         const { name, value, type, files } = e.target;
@@ -167,16 +175,16 @@ const UserPage = () => {
 
     return(
         <>
-         <MyNavbar hideHome={true} hideLogin={true} hidepets={true} hideAdoptions={true} hideProfile={false} />
+         <MyNavbar hideHome={true} hideLogin={true} hidepets={!isdonar} hideAdoptions={!isdonar} hidedonateform={isdonar} hidedonations={isdonar} hideProfile={false} />
 
          <div className='container-fluid d-flex justify-content-center align-items-center user-details-div'>
             <div className='user-details'>
-                <h2 style={{ display: isVisible == 0 ? 'block' : 'none' }}>My Details</h2>
-                <h2 style={{ display: isVisible == 1 ? 'block' : 'none' }}>Edit Details</h2>
-                <h2 style={{ display: isVisible == 2 ? 'block' : 'none' }}>Change Pasword</h2>
+                <h2 style={{ display: isVisible === 0 ? 'block' : 'none' }}>My Details</h2>
+                <h2 style={{ display: isVisible === 1 ? 'block' : 'none' }}>Edit Details</h2>
+                <h2 style={{ display: isVisible === 2 ? 'block' : 'none' }}>Change Pasword</h2>
 
                 <div className="container mt-4 mb-4 d-flex justify-content-center"> 
-                    <div className="card" style={{ display: isVisible == 0 ? 'block' : 'none' }}> 
+                    <div className="card" style={{ display: isVisible === 0 ? 'block' : 'none' }}> 
                         <div className="image d-flex flex-column justify-content-center align-items-center"> 
                             <button className="btn btn-secondary round-div"> 
                                 <img src={formData.image} style={{objectFit:'cover'}} alt="profile"/>
@@ -197,7 +205,7 @@ const UserPage = () => {
                     </div>
                 </div>
 
-                <div style={{ display: isVisible == 1 ? 'block' : 'none' }}>
+                <div style={{ display: isVisible === 1 ? 'block' : 'none' }}>
                     <form onSubmit={handleSubmit} className="d-flex flex-column align-items-center" encType="multipart/form-data">
                         <div className="mb-3">
                             <input
@@ -264,7 +272,7 @@ const UserPage = () => {
                     </form>
                 </div>
 
-                <div style={{ display: isVisible == 2 ? 'block' : 'none' }}>
+                <div style={{ display: isVisible === 2 ? 'block' : 'none' }}>
                     <form onSubmit={handlePasswordSubmit} className="d-flex flex-column align-items-center">
                             <div className="mb-3">
                                 <input

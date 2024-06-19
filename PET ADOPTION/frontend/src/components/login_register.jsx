@@ -34,11 +34,11 @@ const LoginRegister = () => {
     }
 
     useEffect(() => {
-        if(InvalidToken != ''){
+        if(InvalidToken !== ''){
             NotificationManager.error(InvalidToken, 'Error');
             localStorage.setItem('InvalidToken', '');
         }
-    }, []);
+    }, [InvalidToken]);
 
     // UseState Hook For Login And Register Form
     const [formData, setFormData] = useState(initialform);
@@ -183,7 +183,7 @@ const LoginRegister = () => {
 
     return (
         <>
-            <MyNavbar hideHome={false} hideLogin={true} hidepets={false} hideAdoptions={false} hideProfile={false} />
+            <MyNavbar hideHome={false} hideLogin={true} hidepets={false} hideAdoptions={false} hidedonateform={false} hidedonations={false} hideProfile={false} />
             <div className='container-fluid d-flex justify-content-center align-items-center login-register-div'>
                 {loading && (
                     <div className='spinner-overlay'>

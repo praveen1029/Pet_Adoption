@@ -6,8 +6,6 @@ from .serializers import *
 from django.contrib.auth import get_user_model
 from rest_framework import generics
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
-from rest_framework_simplejwt.tokens import UntypedToken
 
 
 User = get_user_model()
@@ -70,3 +68,8 @@ class ValidateTokenView(APIView):
 
     def get(self, request):
             return Response({"detail": "Token is valid."}, status=status.HTTP_200_OK)
+    
+class AdoptPet(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
