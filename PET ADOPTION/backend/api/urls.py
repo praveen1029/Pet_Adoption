@@ -1,5 +1,7 @@
-from django.urls import re_path
+from django.urls import re_path, path
 from .views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     re_path(r'register/', RegisterView.as_view(), name='register'),
@@ -10,4 +12,8 @@ urlpatterns = [
     re_path(r'update_user/', UpdateUser.as_view(), name='update_user'),
     re_path(r'change_password/', ChangePasswordView.as_view(), name='change_password'),
     re_path(r'validate_token/', ValidateTokenView.as_view(), name='validate_token'),
+    re_path(r'my_donations/', ListMyDonations.as_view(), name='my_donations'),
+    re_path(r'my_adoptions/', ListMyAdoptions.as_view(), name='my_adoptions'),
+    path('adopt/<int:pk>', AdoptPet.as_view(), name='adopt-pet'),
+    path('pets/<int:pet_id>/', GetPetDetails.as_view(), name='pet-detail'),
 ]

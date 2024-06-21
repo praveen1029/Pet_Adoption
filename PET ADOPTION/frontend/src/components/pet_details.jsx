@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import { MyNavbar } from './landing';
 import '../components/pet_details.css'
@@ -11,34 +11,50 @@ import axios from 'axios';
 
 const PetDetails = () => {
     const location = useLocation();
-    const { pet } = location.state || {}; // Provide a default empty object
+    const { petId } = location.state || {};
+    const [pet, setPet] = useState('');
 
     const token = localStorage.getItem('access_token');
 
-    const baseurl = BaseURL();
+    const { baseurl,backendurl } = BaseURL();
 
     const navigate = useNavigate();
 
     useEffect(() => {
         const validateToken = async () => {
             try {
-                await axios.get(baseurl + `validate_token/`, {
+                await axios.get(baseurl + 'validate_token/', {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
                     }
                 });
-                
             } catch (error) {
                 localStorage.setItem('InvalidToken', 'Session Expired, Please login again.');
                 navigate('/login-register');
             }
-        }
+        };
         validateToken();
-    });
 
-    function confirmAdopt(){
-        alert('success')
+        const fetchPet = async () => {
+              const response = await axios.get(baseurl + `pets/${petId}/`);
+              setPet(response.data);
+          };
+      
+          fetchPet();
+    }, [baseurl, navigate, token, petId]);
+
+    const confirmAdopt = async () => {
+        const response = await axios.put(baseurl + `adopt/${pet.id}`, {}, {
+            headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+            },
+        })
+        .then(response => {
+            setPet({ ...pet, is_adopted: true });
+            NotificationManager.success(`Adoption Successful.` , 'Success')
+        });
     }
 
     const handleAdoptClick = () => {
@@ -58,13 +74,16 @@ const PetDetails = () => {
         });
     };
 
+
+
     return (
         <>
             <MyNavbar hideHome={true} hideLogin={true} hidepets={true} hideAdoptions={true} hideProfile={true} />
             <div className='container-fluid d-flex justify-content-center align-items-center details-div'>
                 <div className='pet-details-div'>
                     <div className='pets-img'>
-                        <img src={pet.image} alt={pet.category} />
+                    
+                        <img src={`${backendurl + pet.image}`} alt={pet.category} />
                     </div>
                     <div className='pet-details'>
                         <div style={{ height:'100%' }}>
@@ -74,9 +93,13 @@ const PetDetails = () => {
                             </div>
                             <p>{ pet.remark }</p>
                         </div>
-                        <div className="adopt-btn">
+                        { pet.is_adopted ? <div>Adopted</div> : <>
+                            <div className="adopt-btn">
                             <button onClick={handleAdoptClick}> Adopt</button>
                         </div>
+                        </>
+                        }
+                        
                     </div>
                 </div>
             </div>

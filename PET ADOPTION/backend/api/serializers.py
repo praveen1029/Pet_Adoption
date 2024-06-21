@@ -175,3 +175,27 @@ class ChangePasswordSerializer(serializers.Serializer):
             raise serializers.ValidationError("New password must contain at least one special character.")
 
         return data
+    
+class AdoptSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AdoptionDetails
+        fields = ['pet', 'user']
+
+    def update(self, instance, validated_data):
+        user = self.context['request'].user
+        pet = instance.pet
+
+        pet.is_adopted = True
+        pet.save()
+
+        instance.user = user
+        instance.save()
+
+        return instance
+    
+class AdoptedSerializer(serializers.ModelSerializer):
+    pet_details = PetSerializer(source='pet', read_only=True)
+    print(pet_details)
+    class Meta:
+        model = AdoptionDetails
+        fields = '__all__'

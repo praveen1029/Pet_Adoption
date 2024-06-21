@@ -1,6 +1,7 @@
 const BaseURL = () => {
     const baseurl = 'http://localhost:8000/api/';
-  return baseurl
+    const backendurl = 'http://localhost:8000'
+    return {baseurl, backendurl}
 }
 
 export default BaseURL

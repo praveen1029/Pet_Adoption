@@ -5,6 +5,8 @@ import PetForm from './components/pet_form';
 import PetList from './components/pet_list';
 import UserPage from './components/user_page';
 import PetDetails from './components/pet_details';
+import MyDonations from './components/my_donations';
+import MyAdoptions from './components/my_adoptions'
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path='/login-register' element={<LoginRegister />}></Route>
         <Route path='/pet_form' element={<PetForm />}></Route>
         <Route path='/pet_list' element={<PetList />}></Route>
+        <Route path='/my_donations' element={<MyDonations />}></Route>
+        <Route path='/my_adoptions' element={<MyAdoptions />}></Route>
         <Route path='/user_page' element={<UserPage />}></Route>
         <Route path='/pet_details' element={<PetDetails />}></Route>
       </Routes>

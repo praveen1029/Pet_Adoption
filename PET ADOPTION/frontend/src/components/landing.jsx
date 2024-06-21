@@ -30,8 +30,8 @@ export const MyNavbar = ({ hideHome, hideLogin, hidepets, hideAdoptions, hidePro
               { !hideLogin && (<Nav.Link as={Link} className='to-login' to="/login-register">LOGIN</Nav.Link>)}
               { hidepets && (<Nav.Link as={Link} className='to-pet-list' to="/pet_list">PETS</Nav.Link>)}
               { hidedonateform && (<Nav.Link as={Link} className='to-pet-donate' to="/pet_form">DONATE</Nav.Link>)}
-              { hidedonations && (<Nav.Link as={Link} className='to-donations' to="/login-register">MY&nbsp;DONATIONS</Nav.Link>)}
-              { hideAdoptions && (<Nav.Link as={Link} className='to-login' to="/login-register">MY&nbsp;ADOPTIONS</Nav.Link>)}
+              { hidedonations && (<Nav.Link as={Link} className='to-donations' to="/my_donations">MY&nbsp;DONATIONS</Nav.Link>)}
+              { hideAdoptions && (<Nav.Link as={Link} className='to-adoptions' to="/my_adoptions">MY&nbsp;ADOPTIONS</Nav.Link>)}
               { hideProfile && (<Nav.Link as={Link} className='to-profile' to="/user_page">PROFILE</Nav.Link>)}
             </Nav>
           </Navbar.Collapse>

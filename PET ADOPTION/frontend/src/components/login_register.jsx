@@ -19,7 +19,7 @@ const LoginRegister = () => {
     const navigate = useNavigate();
     
     // Calling Baseurl
-    const baseurl = BaseURL();
+    const { baseurl } = BaseURL();
 
     // Initial Values For Form Fields
     const initialform = {

@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const UserPage = () => {
     const token = localStorage.getItem('access_token');
 
-    const baseurl = BaseURL();
+    const { baseurl } = BaseURL();
 
     const navigate = useNavigate();
 
@@ -85,7 +85,7 @@ const UserPage = () => {
         }
         validateToken();
         fetchUserDetails();
-    }, );
+    });
 
     const handleChange = (e) => {
         const { name, value, type, files } = e.target;

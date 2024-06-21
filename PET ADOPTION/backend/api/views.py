@@ -67,9 +67,55 @@ class ValidateTokenView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
-            return Response({"detail": "Token is valid."}, status=status.HTTP_200_OK)
+        return Response({"detail": "Token is valid."}, status=status.HTTP_200_OK)
     
 class AdoptPet(APIView):
     permission_classes = [permissions.IsAuthenticated]
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+class ListMyDonations(generics.ListAPIView):
+    serializer_class = PetSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    def get_queryset(self):
+        user = self.request.user
+        return PetDetails.objects.filter(user = user)
+    
+class AdoptPet(generics.UpdateAPIView):
+    queryset = AdoptionDetails.objects.all()
+    serializer_class = AdoptSerializer
+
+    def update(self, request, *args, **kwargs):
+        pet_id = self.kwargs.get('pk')
+        pet = PetDetails.objects.get(pk=pet_id)
+
+        # Create or get the adopted instance
+        adopted, created = AdoptionDetails.objects.get_or_create(pet=pet, user=request.user)
+
+        # Update the adoption status
+        serializer = self.get_serializer(adopted, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+class GetPetDetails(generics.RetrieveAPIView):
+    queryset = PetDetails.objects.all()
+    serializer_class = PetSerializer
+    lookup_url_kwarg = 'pet_id'
+
+    def retrieve(self, request, *args, **kwargs):
+        pet_id = self.kwargs.get(self.lookup_url_kwarg)
+        try:
+            pet = self.queryset.get(id=pet_id)
+            serializer = self.serializer_class(pet)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except PetDetails.DoesNotExist:
+            return Response({"detail": f"Pet with id {pet_id} does not exist."}, status=status.HTTP_404_NOT_FOUND)
+        
+class ListMyAdoptions(generics.ListAPIView):
+    serializer_class = AdoptedSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    def get_queryset(self):
+        user = self.request.user
+        return AdoptionDetails.objects.filter(user = user)
