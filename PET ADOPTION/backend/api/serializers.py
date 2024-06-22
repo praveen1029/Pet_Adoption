@@ -195,7 +195,6 @@ class AdoptSerializer(serializers.ModelSerializer):
     
 class AdoptedSerializer(serializers.ModelSerializer):
     pet_details = PetSerializer(source='pet', read_only=True)
-    print(pet_details)
     class Meta:
         model = AdoptionDetails
         fields = '__all__'

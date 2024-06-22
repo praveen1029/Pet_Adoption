@@ -2,18 +2,34 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, first_name, last_name, contact=None, password=None, is_donor=False):
+    def create_user(self, email, first_name, last_name, contact=None, address=None, password=None, is_donor=False):
         if not email:
             raise ValueError('The Email field must be set')
         email = self.normalize_email(email)
-        user = self.model(email=email, first_name=first_name, last_name=last_name, contact=contact, is_donor=is_donor)
+        user = self.model(
+            email=email,
+            first_name=first_name,
+            last_name=last_name,
+            contact=contact,
+            address=address,
+            is_donor=is_donor
+        )
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, first_name, password=None):
-        user = self.create_user(email, first_name, password)
+    def create_superuser(self, email, password=None, first_name='', last_name=''):
+        user = self.create_user(
+            email=email,
+            password=password,
+            first_name=first_name,
+            last_name=last_name,
+            contact=None,
+            address=None,
+            is_donor=False
+        )
         user.is_admin = True
+        user.is_superuser = True
         user.save(using=self._db)
         return user
 
@@ -21,12 +37,13 @@ class CustomUser(AbstractBaseUser):
     email = models.EmailField(max_length=255, unique=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    contact = models.CharField(max_length=30)
-    address = models.TextField()
+    contact = models.CharField(max_length=30, null=True)
+    address = models.TextField(null=True)
     is_donor = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
-    image = models.ImageField()
+    is_superuser = models.BooleanField(default=False)  
+    image = models.ImageField(null=True)
 
     objects = CustomUserManager()
 
