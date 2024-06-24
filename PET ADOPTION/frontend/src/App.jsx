@@ -6,7 +6,8 @@ import PetList from './components/pet_list';
 import UserPage from './components/user_page';
 import PetDetails from './components/pet_details';
 import MyDonations from './components/my_donations';
-import MyAdoptions from './components/my_adoptions'
+import MyAdoptions from './components/my_adoptions';
+import AdminLanding from './components/admin_landing';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path='/my_adoptions' element={<MyAdoptions />}></Route>
         <Route path='/user_page' element={<UserPage />}></Route>
         <Route path='/pet_details' element={<PetDetails />}></Route>
+        <Route path='/admin_landing' element={<AdminLanding />}></Route>
       </Routes>
     </BrowserRouter>
     </>

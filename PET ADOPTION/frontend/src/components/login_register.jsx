@@ -128,10 +128,14 @@ const LoginRegister = () => {
             localStorage.setItem('access_token', response.data.access_token);
             localStorage.setItem('refresh_token', response.data.refresh_token);
             setLoading(false);
-            if (response.data.is_donor) {
-                navigate('/pet_form');
-            } else {
-                navigate('/pet_list');
+            if ( response.data.is_superuser ){
+                navigate('/admin_landing');
+            }else{
+                if ( response.data.is_donor ) {
+                    navigate('/pet_form');
+                } else {
+                    navigate('/pet_list');
+                }
             }
         })
         .catch(error => {

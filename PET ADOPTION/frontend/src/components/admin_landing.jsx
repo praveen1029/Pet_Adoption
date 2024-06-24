@@ -5,6 +5,7 @@ import { MyNavbar } from "./landing";
 import '../components/user_page.css';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { useNavigate } from "react-router-dom";
+import AdminNav from "./admin_nav";
 
 const UserPage = () => {
     const token = localStorage.getItem('access_token');
@@ -179,7 +180,7 @@ const UserPage = () => {
 
     return(
         <>
-         <MyNavbar hideHome={true} hideLogin={true} hidepets={!isdonar} hideAdoptions={!isdonar} hidedonateform={isdonar} hidedonations={isdonar} hideProfile={false} />
+         <AdminNav />
 
          <div className='container-fluid d-flex justify-content-center align-items-center user-details-div'>
             <div className='user-details'>

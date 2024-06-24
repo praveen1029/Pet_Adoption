@@ -103,7 +103,7 @@ class PetRegisterSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ['email', 'first_name', 'last_name', 'contact', 'address', 'image', 'is_donor']
+        fields = ['email', 'first_name', 'last_name', 'contact', 'address', 'image', 'is_donor', 'is_superuser']
 
 class UserUpdateSerializer(serializers.ModelSerializer):
     class Meta:
