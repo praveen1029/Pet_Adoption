@@ -60,9 +60,9 @@ const AdminNav = () => {
   return (
     <>
       <SidebarContainer isOpen={isOpen}>
-        <SidebarLink href="user_page">User</SidebarLink>
-        <SidebarLink href="#">About</SidebarLink>
-        <SidebarLink href="#">Services</SidebarLink>
+        <SidebarLink href="admin_details">My Details</SidebarLink>
+        <SidebarLink href="donors">Donors</SidebarLink>
+        <SidebarLink href="users">Users</SidebarLink>
         <SidebarLink href="#">Contact</SidebarLink>
       </SidebarContainer>
       <ToggleButton isOpen={isOpen} onClick={toggleSidebar}>

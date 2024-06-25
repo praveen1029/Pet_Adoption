@@ -129,7 +129,7 @@ const LoginRegister = () => {
             localStorage.setItem('refresh_token', response.data.refresh_token);
             setLoading(false);
             if ( response.data.is_superuser ){
-                navigate('/admin_landing');
+                navigate('/admin_details');
             }else{
                 if ( response.data.is_donor ) {
                     navigate('/pet_form');

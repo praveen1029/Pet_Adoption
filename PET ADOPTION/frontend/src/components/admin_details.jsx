@@ -7,7 +7,7 @@ import { NotificationContainer, NotificationManager } from 'react-notifications'
 import { useNavigate } from "react-router-dom";
 import AdminNav from "./admin_nav";
 
-const UserPage = () => {
+const AdminDetails = () => {
     const token = localStorage.getItem('access_token');
 
     const { baseurl } = BaseURL();
@@ -86,7 +86,7 @@ const UserPage = () => {
         }
         validateToken();
         fetchUserDetails();
-    });
+    },[]);
 
     const handleChange = (e) => {
         const { name, value, type, files } = e.target;
@@ -322,4 +322,4 @@ const UserPage = () => {
     );
 };
 
-export default UserPage;
+export default AdminDetails;

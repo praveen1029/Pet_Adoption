@@ -120,3 +120,13 @@ class ListMyAdoptions(generics.ListAPIView):
     def get_queryset(self):
         user = self.request.user
         return AdoptionDetails.objects.filter(user = user)
+    
+class DonorListView(generics.ListAPIView):
+    queryset = CustomUser.objects.filter(is_donor=True, is_superuser=False)
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+class UserListView(generics.ListAPIView):
+    queryset = CustomUser.objects.filter(is_donor=False, is_superuser=False)
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
