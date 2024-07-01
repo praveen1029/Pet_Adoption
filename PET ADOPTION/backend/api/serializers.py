@@ -55,6 +55,8 @@ class RegisterSerializer(serializers.ModelSerializer):
             fail_silently=False,
         )
 
+        # random_password = '123'
+
         # Create the user
         user = User.objects.create(
             email = validated_data['email'],
@@ -102,7 +104,7 @@ class PetRegisterSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CustomUser
+        model = User
         fields = ['email', 'first_name', 'last_name', 'contact', 'address', 'image', 'is_donor', 'is_superuser']
 
 class UserUpdateSerializer(serializers.ModelSerializer):
@@ -195,6 +197,13 @@ class AdoptSerializer(serializers.ModelSerializer):
     
 class AdoptedSerializer(serializers.ModelSerializer):
     pet_details = PetSerializer(source='pet', read_only=True)
+    class Meta:
+        model = AdoptionDetails
+        fields = '__all__'
+
+class AdoptionDetailserializer(serializers.Serializer):
+    pet = PetSerializer()
+    user = UserSerializer()
     class Meta:
         model = AdoptionDetails
         fields = '__all__'

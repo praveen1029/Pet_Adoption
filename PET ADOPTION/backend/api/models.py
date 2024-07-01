@@ -66,3 +66,4 @@ class AdoptionDetails(models.Model):
     pet = models.ForeignKey(PetDetails, on_delete=models.CASCADE)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True, null=True)
+    is_approved = models.BooleanField(default=False)

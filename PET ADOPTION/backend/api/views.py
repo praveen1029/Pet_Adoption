@@ -130,3 +130,8 @@ class UserListView(generics.ListAPIView):
     queryset = CustomUser.objects.filter(is_donor=False, is_superuser=False)
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+class AdoptionDetails(generics.ListAPIView):
+    queryset = AdoptionDetails.objects.filter(is_approved=False)
+    serializer_class = AdoptionDetailserializer
+    permission_classes = [permissions.IsAuthenticated]
