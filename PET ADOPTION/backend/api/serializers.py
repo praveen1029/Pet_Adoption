@@ -201,9 +201,15 @@ class AdoptedSerializer(serializers.ModelSerializer):
         model = AdoptionDetails
         fields = '__all__'
 
-class AdoptionDetailserializer(serializers.Serializer):
+class AdoptionDetailSerializer(serializers.ModelSerializer):
     pet = PetSerializer()
     user = UserSerializer()
     class Meta:
         model = AdoptionDetails
-        fields = '__all__'
+        fields = ['id', 'pet', 'user', 'date', 'is_approved']
+
+class ApproveAdoptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AdoptionDetails
+        fields = ['id', 'is_approved']
+        

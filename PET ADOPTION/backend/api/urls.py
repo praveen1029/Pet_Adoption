@@ -16,7 +16,10 @@ urlpatterns = [
     re_path(r'my_adoptions/', ListMyAdoptions.as_view(), name='my_adoptions'),
     path('adopt/<int:pk>', AdoptPet.as_view(), name='adopt-pet'),
     path('pets/<int:pet_id>/', GetPetDetails.as_view(), name='pet-detail'),
-    path('donors/', DonorListView.as_view(), name='donor-list'),
-    path('users/', UserListView.as_view(), name='user-list'),
-    path('adoptions_details/', AdoptionDetails.as_view(), name='adoptions_details'),
+    re_path(r'donors/', DonorListView.as_view(), name='donor-list'),
+    re_path(r'users/', UserListView.as_view(), name='user-list'),
+    re_path(r'adoptions_details/', AdoptionList.as_view(), name='adoptions_details'),
+    path('approve_adoption/<int:pk>/', ApproveAdoption.as_view(), name='approve-adoption'),
+    re_path(r'adoptions/', GetAdoptions.as_view(), name='adoptions'),
+    re_path(r'donations/', GetDonations.as_view(), name='donations')
 ]

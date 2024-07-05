@@ -1,0 +1,169 @@
+@media (max-width: 771px) {
+    .form-div {
+        width: 100% !important;
+        transform: translateX(0%) !important;
+    }
+
+    .login-register-div {
+        height: 93vh !important;
+    }
+
+    .form-div-img{
+        display: none !important;
+    }
+
+}
+
+html {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center; /* Center content vertically */
+}
+
+.login-register-div {
+    height: 91vh;
+    width: 100%;
+    background-color: white;
+    position: absolute;
+    background-image: url('../images/login-register-bg.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.login-register-div::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.form-div {
+    flex: 1 1 50%;
+    max-width: 95%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: #52AEA1;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 85vh;
+    width: 60vh;
+    z-index: 1;
+}
+
+.form-div-img {
+    flex: 1 1 50%;
+    max-width: 50%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    background-image: url('../images/login-register-dog.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 85vh;
+    width: 60vh;
+    z-index: 1;
+    transition: background-image 1s ease-in-out;
+}
+
+.cat-img {
+    background-image: url('../images/login-register-cat.png'), radial-gradient(circle, rgb(232,60,37), rgb(201,4,20));
+    background-size: cover;
+    background-position: center;
+}
+
+.logo-div{
+    margin-top: -5%;
+}
+
+.logo-div .name{
+    font-size: large;
+}
+
+.logo-div .logo{
+    width: 20%;
+}
+
+input[type='text'], 
+input[type='email'],
+input[type='password'],
+textarea {
+    appearance: none;
+    border: none;
+    outline: none;
+    border-bottom: .2em solid rgb(228,161,103);
+    background: #52AEA1;
+    border-radius: .2em .2em 0 0;
+    padding: .4em;
+    color: black;
+}
+
+::placeholder {
+    text-align: center;
+    color: black;
+    opacity: .8; 
+}
+
+input[type="file"]::file-selector-button {
+    background-color: #52AEA1;
+    border: 1px solid rgb(228,161,103);
+}
+
+button {
+    border: 2px solid rgb(228,161,103);
+    border-radius: 5px;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #52AEA1;
+}
+
+button:hover{
+    background-color: rgb(232,60,37);
+    color: white;
+}
+
+.move-link{
+    font-size: 15px;
+}
+
+.move-link:hover{
+    cursor: pointer;
+    font-weight: 900;
+}
+
+.spinner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}

@@ -36,10 +36,11 @@ class RegisterPet(generics.CreateAPIView):
 class ListPets(generics.ListAPIView):
     queryset = PetDetails.objects.filter(is_adopted = False)
     serializer_class = PetSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 class GetUser(generics.RetrieveAPIView):
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    
 
     def get_object(self):
         return self.request.user
@@ -131,7 +132,22 @@ class UserListView(generics.ListAPIView):
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-class AdoptionDetails(generics.ListAPIView):
+class AdoptionList(generics.ListAPIView):
     queryset = AdoptionDetails.objects.filter(is_approved=False)
-    serializer_class = AdoptionDetailserializer
+    serializer_class = AdoptionDetailSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+class ApproveAdoption(generics.UpdateAPIView):
+    queryset = AdoptionDetails.objects.filter(is_approved=False)
+    serializer_class = ApproveAdoptionSerializer
+    lookup_field = 'pk'
+
+class GetAdoptions(generics.ListAPIView):
+    queryset = AdoptionDetails.objects.all()
+    serializer_class = AdoptionDetailSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+class GetDonations(generics.ListAPIView):
+    queryset = PetDetails.objects.all()
+    serializer_class = PetSerializer
     permission_classes = [permissions.IsAuthenticated]
