@@ -1,4 +1,4 @@
-.pet-list-div {
+/* .pet-list-div {
     height: 90vh !important;
     width: 100%;
     background-color: white;
@@ -24,7 +24,7 @@
 
 .pet-card-div{
     display: flex;
-    gap: 20px; /* Adjust the gap between items as needed */
+    gap: 20px;
 }
 
 .pet-card{
@@ -45,4 +45,4 @@
 .view-btn{
     border-radius: 16px;
     width: 100%;
-}
+} */

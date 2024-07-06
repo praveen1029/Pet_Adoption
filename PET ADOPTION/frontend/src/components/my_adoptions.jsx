@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import BaseURL from "./base_url";
 import { MyNavbar } from './landing';
-import '../components/my_donations.css'
+import '../components/my_adoptions.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useNavigate } from "react-router-dom";
 
