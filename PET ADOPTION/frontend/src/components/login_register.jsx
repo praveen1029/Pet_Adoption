@@ -208,6 +208,7 @@ const LoginRegister = () => {
                                         onChange={handleChange}
                                         placeholder='Enter Your Email'
                                         style={{ width: '300px' }}
+                                        className='login-register-inputs'
                                     />
                                 </div>
                                 <div className='mb-3'>
@@ -218,10 +219,11 @@ const LoginRegister = () => {
                                         onChange={handleChange}
                                         placeholder='Enter Your Password'
                                         style={{ width: '300px' }}
+                                        className='login-register-inputs'
                                     />
                                 </div>
                                 <div className='mt-3'>
-                                    <button type="submit">Login</button>
+                                    <button type="submit" className='login-register-btn'>Login</button>
                                 </div>
                                 <div className='mt-3'>
                                     <div className='move-link' onClick={handleClick}>Don't have an account?</div>
@@ -242,9 +244,10 @@ const LoginRegister = () => {
                                         onChange={handleChange}
                                         placeholder='Email'
                                         style={{ width: '300px' }}
+                                        className='login-register-inputs'
                                     />
                                 </div>
-                                <div className='d-flex mb-3 justify-content-between' style={{ width: '300px' }}>
+                                <div className='d-flex mb-3 justify-content-between login-register-inputs' style={{ width: '300px' }}>
                                     <input
                                         type="text"
                                         name="first_name"
@@ -272,6 +275,7 @@ const LoginRegister = () => {
                                         pattern='[1-9]{1}[0-9]{9}'
                                         title='Phone number must have 10 digits !!'
                                         style={{ width: '300px' }}
+                                        className='login-register-inputs'
                                     />
                                 </div>
                                 <div className='mb-3'>
@@ -280,7 +284,8 @@ const LoginRegister = () => {
                                         placeholder='Address' 
                                         value={formData.address}
                                         onChange={handleChange}
-                                        style={{ width: '300px' }}>
+                                        style={{ width: '300px' }}
+                                        className='login-register-inputs'>
                                     </textarea>
                                 </div>
                                 <div className='mb-3'>
@@ -288,19 +293,21 @@ const LoginRegister = () => {
                                         type='file' 
                                         name='image' 
                                         onChange={handleChange}
-                                        style={{ width: '300px' }}/>
+                                        style={{ width: '300px' }}
+                                        className='login-register-inputs'/>
                                 </div>
                                 <div className='mb-3'>
-                                    <label>Are you a donor?</label>&nbsp;&nbsp;&nbsp;
+                                    <label className='login-register-checkbox-label'>Are you a donor?</label>&nbsp;&nbsp;&nbsp;
                                     <input
                                         type="checkbox"
                                         name="is_donor"
                                         checked={formData.is_donor}
                                         onChange={handleChange}
+                                        className='login-register-checkbox'
                                     />
                                 </div>
                                 <div className='mt-3'>
-                                    <button type="submit">Register</button>
+                                    <button type="submit" className='login-register-btn'>Register</button>
                                 </div>                                    
                                 <div className='mt-3'>
                                     <div className='move-link' onClick={handleClick}>Already have an account?</div>

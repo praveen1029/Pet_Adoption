@@ -1,3 +1,405 @@
+@media (max-width: 400px) {
+    .user-details {
+        width:90% !important;
+        height:90% !important;
+    }
+
+    .btn1 {
+        height: 46px !important;
+        width: 100px !important;
+        font-size: small !important;
+    }
+
+    .input-fields {
+        width: 240px !important;
+    }
+}
+
+@media(min-width:400px) and (max-width: 500px) {
+    .user-details {
+        width:70% !important;
+        height:90% !important;
+    }
+
+    .btn1 {
+        height: 46px !important;
+        width: 110px !important;
+        font-size: small !important;
+    }
+
+    .input-fields {
+        width: 220px !important;
+    }
+}
+
+@media(min-width:500px) and (max-width: 600px) {
+    .user-details {
+        width:60% !important;
+        height:90% !important;
+    }
+
+    .btn1 {
+        height: 46px !important;
+        width: 110px !important;
+        font-size: small !important;
+    }
+
+    .input-fields {
+        width: 210px !important;
+    }
+}
+
+@media(min-width:600px) and (max-width: 700px) {
+    .user-details {
+        width:50% !important;
+        height:90% !important;
+    }
+
+    .btn1 {
+        height: 46px !important;
+        width: 120px !important;
+        font-size: small !important;
+    }
+    
+    .input-fields {
+        width: 200px !important;
+    }
+}
+
+@media(min-width:700px) and (max-width: 900px) {
+    .user-details {
+        width:40% !important;
+        height:90% !important;
+    }
+
+    .btn1 {
+        height: 43px !important;
+        width: 120px !important;
+        font-size: small !important;
+    }
+
+    .input-fields {
+        width: 200px !important;
+    }
+}
+
+@media(min-width:900px) and (max-width: 1000px) {
+    .user-details {
+        width:35% !important;
+        height:90% !important;
+    }
+
+    .btn1 {
+        height: 43px !important;
+        width: 120px !important;
+        font-size: small !important;
+    }
+
+    .input-fields {
+        width: 250px !important;
+    }
+}
+
+@media(min-width:1000px) and (max-width: 1100px) {
+    .user-details {
+        width:30% !important;
+        height:90% !important;
+    }
+
+    .btn1 {
+        height: 43px !important;
+        width: 120px !important;
+        font-size: small !important;
+    }
+    
+    .input-fields {
+        width: 250px !important;
+    }
+}
+
+@media(min-width:1100px) and (max-width: 1300px) {
+    .user-details {
+        width:25% !important;
+        height:90% !important;
+    }
+
+    .btn1 {
+        height: 43px !important;
+        width: 120px !important;
+        font-size: small !important;
+    }
+    
+    .input-fields {
+        width: 250px !important;
+    }
+}
+
+@media (height: 600px){
+    .user-details {
+        height:90% !important;
+    }
+
+    .round-div {
+        height: 100px !important;
+        width: 100px !important;
+    }
+
+}
+
+@media (height: 800px){
+    .user-details {
+        height:70% !important;
+    }
+
+    .round-div {
+        height: 100px !important;
+        width: 100px !important;
+    }
+
+}
+
+@media (height: 896px) or (height: 932px) {
+    .user-details {
+        height:70% !important;
+        font-size: large !important;
+    }
+}
+
+
+@media (min-height:914px) and (max-height:916px) {
+    .user-details {
+        width: 80% !important;
+        height:70% !important;
+    }
+}
+
+@media (height: 1180px) {
+    .user-details {
+        height:60% !important;
+    }
+}
+
+@media (min-height:1023px) and (max-height:1025px) {
+    .user-details {
+        width: 60% !important;
+        height:70% !important;
+    }
+
+    .main-head {
+        font-size: 40px !important;
+    }
+
+    .round-div {
+        height: 150px !important;
+        width: 150px !important;
+    }
+
+    .name {
+        font-size: 30px !important;
+    }
+
+    .idd {
+        font-size: 20px !important;
+    }
+
+    .btn1 {
+        height: 70px !important;
+        width: 150px !important;
+        font-size: large !important;
+    }
+    
+    .text span {
+        font-size: 20px !important;
+    }
+    
+    .join {
+        font-size: 14px !important;
+    }
+
+    .input-fields {
+        width: 300px !important;
+        font-size: x-large;
+    }
+
+}
+
+@media (min-height:1179px) and (max-height:1181px) {
+    .user-details {
+        width: 60% !important;
+        height:70% !important;
+    }
+
+    .main-head {
+        font-size: 40px !important;
+    }
+
+    .round-div {
+        height: 150px !important;
+        width: 150px !important;
+    }
+
+    .name {
+        font-size: 35px !important;
+    }
+
+    .idd {
+        font-size: 25px !important;
+    }
+
+    .btn1 {
+        height: 100px !important;
+        width: 200px !important;
+        font-size: x-large !important;
+    }
+    
+    .text span {
+        font-size: 25px !important;
+    }
+    
+    .join {
+        font-size: 19px !important;
+    }
+
+    .input-fields {
+        width: 300px !important;
+        font-size: x-large !important;
+    }
+
+}
+
+@media (min-height:1279px) and (max-height:1281px) {
+    .user-details {
+        width: 60% !important;
+        height:70% !important;
+    }
+
+    .main-head {
+        font-size: 40px !important;
+    }
+
+    .round-div {
+        height: 150px !important;
+        width: 150px !important;
+    }
+
+    .name {
+        font-size: 35px !important;
+    }
+
+    .idd {
+        font-size: 25px !important;
+    }
+
+    .btn1 {
+        height: 100px !important;
+        width: 200px !important;
+        font-size: x-large !important;
+    }
+    
+    .text span {
+        font-size: 25px !important;
+    }
+    
+    .join {
+        font-size: 19px !important;
+    }
+
+    .input-fields {
+        width: 350px !important;
+        font-size: xx-large;
+    }
+
+}
+
+@media (min-height:1366px) and (max-height:1369px) {
+    .user-details {
+        width: 60% !important;
+        height:70% !important;
+    }
+
+    .main-head {
+        font-size: 50px !important;
+    }
+
+    .round-div {
+        height: 200px !important;
+        width: 200px !important;
+    }
+
+    .name {
+        font-size: 42px !important;
+    }
+
+    .idd {
+        font-size: 34px !important;
+    }
+
+    .btn1 {
+        height: 100px !important;
+        width: 200px !important;
+        font-size: x-large !important;
+    }
+    
+    .text span {
+        font-size: 33px !important;
+    }
+    
+    .join {
+        font-size: 24px !important;
+    }
+
+    .input-fields {
+        width: 350px !important;
+        font-size: xx-large;
+    }
+
+}
+
+@media (min-width:2560px) and (min-height:1428px) {
+    .user-details {
+        width: 30% !important;
+        height:70% !important;
+    }
+
+    .main-head {
+        font-size: 50px !important;
+    }
+
+    .round-div {
+        height: 200px !important;
+        width: 200px !important;
+    }
+
+    .name {
+        font-size: 42px !important;
+    }
+
+    .idd {
+        font-size: 34px !important;
+    }
+
+    .btn1 {
+        height: 100px !important;
+        width: 200px !important;
+        font-size: x-large !important;
+    }
+    
+    .text span {
+        font-size: 33px !important;
+    }
+    
+    .join {
+        font-size: 24px !important;
+    }
+
+    .input-fields {
+        width: 500px !important;
+        font-size: xx-large;
+    }
+
+}
+
+
 .user-details-div {
     background-image: url('../images/user-details-bg.jpg');
     background-size: cover;
@@ -8,8 +410,8 @@
 
 .user-details {
     text-align: center;
-    width:60vh;
-    height:80vh;
+    width:25%;
+    height:85%;
     background-color: #52AEA1;
     border-radius: 16px;
     padding: 15px;
@@ -34,7 +436,7 @@
     height: 140px;
     width: 140px;
     border-radius: 50%;
-    background-color: #f0f0f0; /* Example background color */
+    background-color: #f0f0f0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,11 +444,10 @@
 }
 
 .round-div img {
-    width: 100%; /* Makes the image fit the div */
-    height: 100%; /* Ensures the image covers the div */
-    object-fit: cover; /* Ensures the image covers the div without distortion */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
-
 
 .card {
     width: 350px;
@@ -61,9 +462,12 @@
 }
 
 .card:hover .image img {
-    transform: scale(1.5)
+    transform: scale(2)
 }
 
+.card .image img {
+    transform: scale(1.5)
+}
 
 .name {
     font-size: 22px;
@@ -74,16 +478,6 @@
     font-size: 14px;
     font-weight: 600
 }
-
-.idd1 {
-    font-size: 12px
-}
-
-.number {
-    font-size: 22px;
-    font-weight: bold
-}
-
 
 .btn1 {
     height: 50px;

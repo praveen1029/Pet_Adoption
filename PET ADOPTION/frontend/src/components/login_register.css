@@ -11,7 +11,187 @@
     .form-div-img{
         display: none !important;
     }
+}
 
+@media (min-height:1023px) and (max-height:1025px) {
+    .form-div {
+        width: 60vh !important;
+        transform: translateX(0%) !important;
+    }
+
+    .logo-div .name{
+        font-size: xx-large !important;
+    }
+    
+    .logo-div .logo{
+        width: 40% !important;
+    }
+
+    .login-register-div {
+        height: 93vh !important;
+    }
+
+    .form-div-img{
+        display: none !important;
+    }
+
+    .login-register-inputs {
+        width: 500px !important;
+        font-size: x-large !important;
+    }
+
+    .login-register-checkbox-label, .move-link {
+        font-size: x-large !important;
+    }
+
+    .login-register-btn {
+        width: 20vh !important;
+        height: 50px !important;
+        font-size: large;
+    }
+}
+
+@media (min-height:1279px) and (max-height:1281px) {
+    .form-div {
+        width: 60vh !important;
+        transform: translateX(0%) !important;
+    }
+
+    .logo-div .name{
+        font-size: xx-large !important;
+    }
+    
+    .logo-div .logo{
+        width: 40% !important;
+    }
+
+    .login-register-div {
+        height: 93vh !important;
+    }
+
+    .form-div-img{
+        display: none !important;
+    }
+
+    .login-register-inputs {
+        width: 500px !important;
+        font-size: x-large !important;
+    }
+
+    .login-register-checkbox-label, .move-link {
+        font-size: x-large !important;
+    }
+
+    .login-register-btn {
+        width: 20vh !important;
+        height: 50px !important;
+        font-size: large;
+    }
+}
+
+@media (min-height:1179px) and (max-height:1181px) {
+    .form-div {
+        width: 60vh !important;
+        transform: translateX(0%) !important;
+    }
+
+    .logo-div .name{
+        font-size: xx-large !important;
+    }
+    
+    .logo-div .logo{
+        width: 40% !important;
+    }
+
+    .login-register-div {
+        height: 93vh !important;
+    }
+
+    .form-div-img{
+        display: none !important;
+    }
+
+    .login-register-inputs {
+        width: 500px !important;
+        font-size: x-large !important;
+    }
+
+    .login-register-checkbox-label, .move-link {
+        font-size: x-large !important;
+    }
+
+    .login-register-btn {
+        width: 20vh !important;
+        height: 50px !important;
+        font-size: large;
+    }
+}
+
+@media (min-height:1365px) and (max-height:1369px) {
+    .form-div {
+        width: 60vh !important;
+        transform: translateX(0%) !important;
+    }
+
+    .logo-div .name{
+        font-size: xx-large !important;
+    }
+    
+    .logo-div .logo{
+        width: 40% !important;
+    }
+
+    .login-register-div {
+        height: 93vh !important;
+    }
+
+    .form-div-img{
+        display: none !important;
+    }
+
+    .login-register-inputs {
+        width: 500px !important;
+        font-size: x-large !important;
+    }
+
+    .login-register-checkbox-label, .move-link {
+        font-size: x-large !important;
+    }
+
+    .login-register-btn {
+        width: 20vh !important;
+        height: 50px !important;
+        font-size: large;
+    }
+}
+
+@media (min-width:2560px) and (min-height:1428px) {
+    .logo-div .name{
+        font-size: 60px !important;
+    }
+    
+    .logo-div .logo{
+        width: 70% !important;
+    }
+
+    .login-register-inputs {
+        width: 700px !important;
+        font-size: xx-large !important;
+    }
+
+    .login-register-checkbox-label, .move-link {
+        font-size: xx-large !important;
+    }
+
+    .login-register-checkbox {
+        transform: scale(2.5) !important;
+    }
+
+    .login-register-btn {
+        width: 30vh !important;
+        height: 70px !important;
+        font-size: xx-large !important;
+    }
 }
 
 html {
@@ -29,7 +209,7 @@ html {
 }
 
 .login-register-div {
-    height: 91vh;
+    height: 95vh;
     width: 100%;
     background-color: white;
     position: absolute;
@@ -130,7 +310,7 @@ input[type="file"]::file-selector-button {
     border: 1px solid rgb(228,161,103);
 }
 
-button {
+.login-register-btn {
     border: 2px solid rgb(228,161,103);
     border-radius: 5px;
     color: black;
@@ -141,7 +321,7 @@ button {
     background-color: #52AEA1;
 }
 
-button:hover{
+.login-register-btn:hover{
     background-color: rgb(232,60,37);
     color: white;
 }

@@ -67,7 +67,6 @@ const UserPage = () => {
         }
     };
 
-
     useEffect(() => {
         const validateToken = async () => {
             try {
@@ -83,9 +82,10 @@ const UserPage = () => {
                 navigate('/login-register');
             }
         }
+    
         validateToken();
         fetchUserDetails();
-    });
+    },[token, baseurl]);
 
     const handleChange = (e) => {
         const { name, value, type, files } = e.target;
@@ -183,15 +183,15 @@ const UserPage = () => {
 
          <div className='container-fluid d-flex justify-content-center align-items-center user-details-div'>
             <div className='user-details'>
-                <h2 style={{ display: isVisible === 0 ? 'block' : 'none' }}>My Details</h2>
-                <h2 style={{ display: isVisible === 1 ? 'block' : 'none' }}>Edit Details</h2>
-                <h2 style={{ display: isVisible === 2 ? 'block' : 'none' }}>Change Pasword</h2>
+                <h2 className="main-head" style={{ display: isVisible === 0 ? 'block' : 'none' }}>My Details</h2>
+                <h2 className="main-head"style={{ display: isVisible === 1 ? 'block' : 'none' }}>Edit Details</h2>
+                <h2 className="main-head" style={{ display: isVisible === 2 ? 'block' : 'none' }}>Change Pasword</h2>
 
-                <div className="container mt-4 mb-4 d-flex justify-content-center"> 
+                <div className="container mt-4 mb-4 d-flex justify-content-center align-items-center"> 
                     <div className="card" style={{ display: isVisible === 0 ? 'block' : 'none' }}> 
                         <div className="image d-flex flex-column justify-content-center align-items-center"> 
                             <button className="btn btn-secondary round-div"> 
-                                <img src={formData.image} style={{objectFit:'cover'}} alt="profile"/>
+                                <img src={formData.image} alt="profile"/>
                             </button> 
                             <span className="name mt-3">{formData.first_name}&nbsp;{formData.last_name}</span> 
                             <span className="idd">{formData.email}</span> 
@@ -201,7 +201,7 @@ const UserPage = () => {
                             <div className="px-2 rounded mt-4 date">
                                 <span className="join">Contact: {formData.contact}</span> 
                             </div> <br />
-                            <div className="d-flex gap-3 mt-2"> 
+                            <div className="d-flex gap-3 mt-1"> 
                                 <button className="btn1 btn-dark" onClick={toggleToEdit}>Edit Profile</button> 
                                 <button className="btn1 btn-dark" onClick={toggleToPassword}>Change Password</button>
                             </div> 
@@ -219,9 +219,10 @@ const UserPage = () => {
                                 onChange={handleChange}
                                 placeholder="Email"
                                 style={{ width: '300px' }}
+                                className="input-fields"
                             />
                         </div>
-                        <div className="d-flex mb-3 justify-content-between" style={{ width: '300px' }}>
+                        <div className="d-flex mb-3 justify-content-between input-fields" style={{ width: '300px' }}>
                             <input
                                 type="text"
                                 name="first_name"
@@ -249,6 +250,7 @@ const UserPage = () => {
                                 pattern="[1-9]{1}[0-9]{9}"
                                 title="Phone number must have 10 digits !!"
                                 style={{ width: '300px' }}
+                                className="input-fields"
                             />
                         </div>
                         <div className="mb-3">
@@ -257,7 +259,8 @@ const UserPage = () => {
                                 placeholder="Address"
                                 value={formData.address}
                                 onChange={handleChange}
-                                style={{ width: '300px' }}>
+                                style={{ width: '300px' }}
+                                className="input-fields">
                             </textarea>
                         </div>
                         <div className="mb-3">
@@ -267,6 +270,7 @@ const UserPage = () => {
                                 onChange={handleChange}
                                 style={{ width: '300px' }}
                                 src={formData.image}
+                                className="input-fields"
                             />
                         </div>
                         <div className="d-flex gap-3 mt-2"> 
@@ -286,6 +290,7 @@ const UserPage = () => {
                                     onChange={handlePasswordChange}
                                     placeholder="Old Password"
                                     style={{ width: '300px' }}
+                                    className="input-fields"
                                 />
                             </div>
                             <div className="mb-3">
@@ -296,6 +301,7 @@ const UserPage = () => {
                                     onChange={handlePasswordChange}
                                     placeholder="New Password"
                                     style={{ width: '300px' }}
+                                    className="input-fields"
                                 />
                             </div>
                             <div className="mb-3">
@@ -306,13 +312,14 @@ const UserPage = () => {
                                     onChange={handlePasswordChange}
                                     placeholder="Confirm Password"
                                     style={{ width: '300px' }}
+                                    className="input-fields"
                                 />
                             </div>
                             <div className="d-flex gap-3 mt-2">
                                 <button className="btn1 btn-dark" type="submit">Update</button> 
                                 <button className="btn1 btn-dark" onClick={toggleToDetails}>Back</button>
                             </div>
-                        </form>
+                    </form>
                 </div>
             </div>
             <NotificationContainer />

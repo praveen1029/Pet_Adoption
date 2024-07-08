@@ -14,7 +14,7 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/f
 export const MyNavbar = ({ hideHome, hideLogin, hidepets, hideAdoptions, hideProfile, hidedonateform, hidedonations }) => {
   return(
     <>
-      <Navbar className='nav' expand="sm">
+      <Navbar className='nav' expand="sm" style={{zIndex:'10'}}>
         <Container fluid>
           <div className='d-flex justify-content-between align-items-end'>
             <div>
